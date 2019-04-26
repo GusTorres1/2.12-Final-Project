@@ -5,22 +5,22 @@ from std_msgs.msg import String
 import cv2
 import numpy as np
 
-topic = 'Centroid'
+#topic for publishing
+topic = 'Centroid Data'
 # publishes centroid and verifies when to take a new picture
 def Centroid():
-    #chatter is message topic
     pub = rospy.Publisher(topic, String, queue_size=10)
     #talker is the node name
-    rospy.init_node('Centroid Retrieval', anonymous=True)
+    rospy.init_node('Centroid', anonymous=True)
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
-        hello_str = "hello world %s" % rospy.get_time()
-        rospy.loginfo(hello_str)
-        pub.publish(hello_str)
+        #current ROS upper level logic
+        control_inputs = centroid_from_Picture()
+        pub.publish(control_inputs)
         rate.sleep()
 
 # captures picture and processes centroids
-def takePictrue():
+def centroid_from_Picture():
     cap=cv2.VideoCapture(0)
     ret, frame = cap.read()
     img = cv2.resize(frame,(1000,1000))
