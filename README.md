@@ -1,6 +1,6 @@
 # 2.12 Updates
 
-# 4/26/2019
+# 4/26/2019 : Gustavo
 CameraNode.py is the ROS Node handling centroid detection.
 The transfer from camera coordinates to xy coordinates need to be implemented and found.
 The colors for segmentation need to be found.
