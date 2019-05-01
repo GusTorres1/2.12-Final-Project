@@ -12,6 +12,9 @@
 int controlInf = 2;
 int controlVac = 3;
 
+// led for testing purposes
+int ledTest = 13;
+
 // Creates a ROS node
 ros::NodeHandle Gripper;
 
@@ -54,11 +57,15 @@ void switchMode(int toggle_msg){
   if (toggle_msg == 1){
     digitalWrite(controlInf, LOW);
     digitalWrite(controlVac, HIGH); // begin to inflate
+    
+    digitalWrite(ledTest, HIGH); // turn light on!
   }
     
   else if (toggle_msg == 0){
     digitalWrite(controlInf, HIGH);
     digitalWrite(controlVac, LOW); // begin to vacuum
+
+    digitalWrite(ledTest, LOW); // turn light off
   }
 }
 
@@ -66,4 +73,6 @@ void switchMode(int toggle_msg){
 void stop_all(){
   digitalWrite(controlInf, HIGH);
   digitalWrite(controlVac, HIGH); // stop both!
+
+  digitalWrite(ledTest, LOW); // turn light off
   }
