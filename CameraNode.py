@@ -22,7 +22,7 @@ def Centroid():
 def getControl():
     cen = centroid_from_Picture()
     return xy_from_centroid( cen )
-
+offset = 94.5
 # captures picture and processes centroids
 def centroid_from_Picture():
     cap=cv2.VideoCapture(0)
