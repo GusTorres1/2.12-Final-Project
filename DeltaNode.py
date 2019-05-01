@@ -1,22 +1,17 @@
 #!/usr/bin/env python
+# license removed for brevity
 import rospy
 from std_msgs.msg import String
 import cv2
 import numpy as np
 
 #topic for publishing
-input_topic = 'Centroid_Data'
 output_topic = 'Motor_Control'
 # publishes centroid and verifies when to take a new picture
-def Centroid():
-    rospy.init_node('Shapes', anonymous=True)
-    pub = rospy.Publisher(input_topic, String, queue_size=10)
-    rate = rospy.Rate(10) # 10hz
-    while not rospy.is_shutdown():
-        #current ROS upper level logic
-        control_inputs = getControl()
-        pub.publish(control_inputs)
-        rate.sleep()
+def DeltaRobot():
+    rospy.init_node( 'DeltaRobot', anonymous = True )
+    sub = rospy.Subscriber( output_topic, String, queue_size=10)
+   
 
 # get xy from centroids
 def getControl():
