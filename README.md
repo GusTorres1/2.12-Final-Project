@@ -1,5 +1,10 @@
 # 2.12 Updates
 
+# 5/1/2019 : Gustavo
+The segmentation HSV values have been found empirically.
+The Camera has been implemented on the frame.
+Only the camera coordinates need to be implemented.
+
 # 4/26/2019 : Gustavo
 CameraNode.py is the ROS Node handling centroid detection.
 The transfer from camera coordinates to xy coordinates need to be implemented and found.
