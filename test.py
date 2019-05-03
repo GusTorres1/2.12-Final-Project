@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-from matplotlib import pyplot as plt
 
 def nothing(x):
     pass
@@ -28,16 +27,9 @@ while(True):
 
     # Our operations on the frame come here
     # gray = cv2.cvtColor(frame,cv2.COLOR_RGB2RGBA)
-    hsv=cv2.cvtColor(frame,cv2.COLOR_RGB2HSV)
+    hsv=cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
     # hsv=cv2.cvtColor(frame,cv2.COLOR_RGB2HSV)
     # hsv=cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
-
-    # Display the resulting frame
-    # cv2.imshow('frame',hs1)
-    # cv2.imshow('frame',hs2)
-
-    # define range of blue color in HSV
-    # lower_red = np.array([[[-5,0,0]]])+hsv
 
     lower_red=np.array([rl,gl,bl])
     upper_red = np.array([rh,gh,bh])
@@ -46,9 +38,6 @@ while(True):
     # Bitwise-AND mask and original image
     res1 = cv2.bitwise_and(frame,frame, mask= mask)
 
-    # cv2.calcHist([frame],[0],None,[256],[0,256])
-    # plt.hist(frame.ravel(), 256, [0, 256])
-    # plt.show()
 
     cv2.imshow('frame',frame)
     cv2.imshow('mask',mask)
