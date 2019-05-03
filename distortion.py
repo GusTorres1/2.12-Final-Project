@@ -43,7 +43,7 @@ for i in range(0, 40):
 cap.release()
 cv2.destroyAllWindows()
 
-ret, mtx, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
+ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
 print(mtx)
 print(dist)
 print(rvecs)
