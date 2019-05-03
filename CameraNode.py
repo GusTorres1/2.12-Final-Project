@@ -46,6 +46,7 @@ colors = [( 'red', np.array([0,100,100]), np.array([5,255,255]) ),
     ('pink', np.array([160,70,80]), np.array([175,220,255]) ),
     ('brown', np.array([160,100,10]), upper_red = np.array([180,200,60]) ),
     ('black', np.array([120,0,0]), np.array([170,70,60]) ) ]
+    
 # creates color segmentation of the workspace.
 def getShapes( image, h ):
     masks = []
