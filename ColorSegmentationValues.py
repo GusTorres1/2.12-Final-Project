@@ -10,12 +10,12 @@ while (True):
     hsv = cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
     
     # Range for upper range for red
-    lower_red = np.array([170,120,70])
-    upper_red = np.array([180,255,255])
+    lower_red = np.array([120,0,0])
+    upper_red = np.array([170,70,60])
     mask = cv2.inRange(hsv,lower_red,upper_red)
     
     result = cv2.bitwise_and(frame, frame, mask=mask)
-    cv2.imshow('Res',result)
+    cv2.imshow('Res',mask)
     if cv2.waitKey(10) & 0xFF == ord('b'):
         break
 
