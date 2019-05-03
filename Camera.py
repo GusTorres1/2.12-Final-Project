@@ -22,7 +22,8 @@ def Centroid():
 def getControl():
     cen = centroid_from_Picture()
     return xy_from_centroid( cen )
-
+    
+offset = 94.5
 # captures picture and processes centroids
 def centroid_from_Picture():
     cap=cv2.VideoCapture(0)
@@ -39,7 +40,13 @@ def centroid_from_Picture():
 # should be tuples of (
 # color (String),
 # lower bound (array), upper bound (array) )
-colors = []
+colors = [ ('red', np.array([177,76,92]), np.array(255,255,255) ),
+    ('blue', np.array([52,58,77]), np.array([130,255,255]) ),
+    ('yellow',np.array([19,57,108]), np.array([87,255,255]) ),
+    ('pink', np.array([130,89, 94]), np.array([173,255,255]) ),
+    ('brown', np.array([150,47,43]), np.array([180,143,88]) ),
+    ('black', np.array([52, 0, 0]), np.array([148,74,74]) ) ]
+    
 # creates color segmentation of the workspace.
 def getShapes( image, h ):
     masks = []
