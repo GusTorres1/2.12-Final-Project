@@ -1,7 +1,6 @@
 #!/usr/bin/python
 """
 Interface from Python to ODrive
-
 Daniel J. Gonzalez - dgonz@mit.edu
 2.12 Intro to Robotics Spring 2019
 """
@@ -51,6 +50,8 @@ axis1 = None
 axis2 = None
 
 def rad2Count(angle):
+	
+	#THIS DOESN'T WORK
     try:
         return [100000-ang/CPR2RAD for ang in angle]
     except TypeError:
@@ -60,6 +61,7 @@ def r2c(angle):
     return rad2Count(angle)
 
 def count2Rad(count):
+	#THIS DOESN'T WORK
     try:
         return [(100000-cnt)*CPR2RAD for cnt in count]
     except TypeError:
@@ -101,10 +103,12 @@ def connect_all():
     global axis0, axis1, axis2, axes
     for ii in range(len(odrvs)):
         if usb_serials[ii] == None:
-            continue
+            continue 
         print("finding odrive: " + usb_serials[ii]+ "...")
         #odrvs[ii]= odrive.find_any(serial_number = usb_serials[ii])
-        odrvs[ii]= API.connect(serial_number = usb_serials[ii])
+        od_test = API
+        od_test.connect(serial_number = usb_serials[ii])
+        odrvs[ii]= od_test.driver
         print("found odrive! " + str(ii))
     axis0 = odrvs[0].axis0
     axis1 = odrvs[0].axis1
@@ -137,38 +141,33 @@ connect_all()
 printPos()
 
 def vel_test_one(ii = 0, amt = 10000, mytime = 2):
-    axis = axes[ii]
-    axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-    axis.controller.config.control_mode = CTRL_MODE_VELOCITY_CONTROL
-    
-    axis.controller.vel_setpoint = 0
-    time.sleep(mytime)
-    print(0)
-    print_all()
-    time.sleep(0.25)
-    
-    axis.controller.vel_setpoint = amt
-    time.sleep(mytime)
-    print(1)
-    print_all()
-    time.sleep(0.25)
-
-    axis.controller.vel_setpoint = 0
-    time.sleep(mytime)
-    print(2)
-    print_all()
-    time.sleep(0.25)
-
-    axis.controller.vel_setpoint = -amt
-    time.sleep(mytime)
-    print(3)
-    print_all() 
-    time.sleep(0.25)
-
-    axis.controller.vel_setpoint = 0
-    time.sleep(mytime)
-    print(4)
-    print_all()
+	axis = axes[ii]
+	axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+	axis.controller.config.control_mode = CTRL_MODE_VELOCITY_CONTROL
+	axis.controller.vel_setpoint = 0
+	time.sleep(mytime)
+	print(0)
+	print_all()
+	time.sleep(0.25)
+	axis.controller.vel_setpoint = amt
+	time.sleep(mytime)
+	print(1)
+	print_all()
+	time.sleep(0.25)
+	axis.controller.vel_setpoint = 0
+	time.sleep(mytime)
+	print(2)
+	print_all()
+	time.sleep(0.25)
+	axis.controller.vel_setpoint = -amt
+	time.sleep(mytime)
+	print(3)
+	print_all() 
+	time.sleep(0.25)
+	axis.controller.vel_setpoint = 0
+	time.sleep(mytime)
+	print(4)
+	print_all()
 
 def vel_test_all(amt = 30000, mytime = 2):
     count = 0
@@ -184,7 +183,6 @@ def vel_test_all(amt = 30000, mytime = 2):
     #print_all()
     time.sleep(0.25)
     count = 0
-
     for axis in axes:
         axis.controller.vel_setpoint = -amt
         print("setpoint " + str(axis.controller.vel_setpoint))
@@ -197,7 +195,6 @@ def vel_test_all(amt = 30000, mytime = 2):
     #print_all() 
     time.sleep(0.25)
     count = 0
-
     for axis in axes:
         axis.controller.vel_setpoint = 0
         print("setpoint " + str(axis.controller.vel_setpoint))
@@ -210,7 +207,6 @@ def vel_test_all(amt = 30000, mytime = 2):
     #print_all()
     time.sleep(0.25)
     count = 0
-
     for axis in axes:
         axis.controller.vel_setpoint = amt
         print("setpoint " + str(axis.controller.vel_setpoint))
@@ -223,7 +219,6 @@ def vel_test_all(amt = 30000, mytime = 2):
     #print_all() 
     time.sleep(0.25)
     count = 0
-
     for axis in axes:
         axis.controller.vel_setpoint = 0
         print("setpoint " + str(axis.controller.vel_setpoint))
@@ -238,12 +233,14 @@ def vel_test_all(amt = 30000, mytime = 2):
 def trajMoveCnt(posDesired = (10000, 10000, 10000), velDesired = 50000, accDesired = 50000):
     for ii in range(0,3):
         axis = axes[ii]
+        #THIS DOESN'T WORK
         axis.trap_traj.config.vel_limit = velDesired #600000 max, 50000 is 1/8 rev per second
         axis.trap_traj.config.accel_limit = accDesired #50000 is 1/8 rev per second per second
         axis.trap_traj.config.decel_limit = accDesired
         axis.controller.move_to_pos(posDesired[ii]) 
 
 def trajMoveRad(posDesired = (0, 0, 0), velDesired = 2*pi/8, accDesired = 2*pi/8):
+	#THIS DOESN'T WORK
     trajMoveCnt(rad2Count(posDesired), rad2Count(velDesired), rad2Count(accDesired))
 
 def test_one(ii = 0, amt = 10000, mytime = 5):
@@ -256,19 +253,16 @@ def test_one(ii = 0, amt = 10000, mytime = 5):
     print(0)
     print_all()
     time.sleep(0.25)
-
     axis.controller.pos_setpoint = 0
     time.sleep(mytime)
     print(1)
     print_all()
     time.sleep(0.25)
-
     axis.controller.pos_setpoint = amt
     time.sleep(mytime)
     print(2)
     print_all() 
     time.sleep(0.25)
-
     axis.controller.pos_setpoint = 0
     time.sleep(mytime)
     print(3)
@@ -285,7 +279,6 @@ def test_all(amt = 50000, mytime = 2):
     print(0)
     #print_all()
     time.sleep(0.25)
-
     for axis in axes:
         axis.controller.pos_setpoint = 0
         print("setpoint " + str(axis.controller.pos_setpoint))
@@ -295,7 +288,6 @@ def test_all(amt = 50000, mytime = 2):
     print(1)
     #print_all()
     time.sleep(0.25)
-
     for axis in axes:
         axis.controller.pos_setpoint = amt
         print("setpoint " + str(axis.controller.pos_setpoint))
@@ -305,7 +297,6 @@ def test_all(amt = 50000, mytime = 2):
     print(2)
     #print_all()
     time.sleep(0.25)
-
     for axis in axes:
         axis.controller.pos_setpoint = 0
         print("setpoint " + str(axis.controller.pos_setpoint))
@@ -345,20 +336,15 @@ def full_init(reset = True):
     #brake resistance
     odrvs[0].config.brake_resistance = 0
     odrvs[1].config.brake_resistance = 0
-
     for axis in axes:
         if(reset):
             axis.motor.config.pre_calibrated = False
             axis.encoder.config.pre_calibrated = False
-
         #motor current limit
         axis.motor.config.current_lim = 5
-
         #pole pairs
         axis.motor.config.pole_pairs = 4
-
         axis.controller.config.vel_limit = 600000 #50000 counts/second is 1/8 revolution per second
-
         # 0.0612 [(revolutions/second)/Volt], 400000 counts per revolution
         # Max speed is 1.35 Revolutions/second, or 539000counts/second
         axis.motor.config.motor_type = MOTOR_TYPE_HIGH_CURRENT
@@ -366,12 +352,10 @@ def full_init(reset = True):
         axis.encoder.config.bandwidth = 1000
         axis.encoder.config.use_index = True
         axis.encoder.config.zero_count_on_find_idx = True
-        axis.encoder.config.idx_search_speed = 1
+        #axis.encoder.config.idx_search_speed = 1
         axis.encoder.config.pre_calibrated = False
-
         #motor calibration current
         axis.motor.config.calibration_current = 5
-
         #axis state
         if(axis.motor.config.pre_calibrated == False):
             axis.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
@@ -383,20 +367,16 @@ def full_init(reset = True):
         axis.config.startup_encoder_index_search = True
         axis.config.startup_encoder_offset_calibration = True
         axis.controller.config.control_mode = CTRL_MODE_POSITION_CONTROL
-
         #motor calibration current FOR INDEX SEARCH
         axis.motor.config.calibration_current = 5
-
         #Set closed loop gains
         kP_des = Nm2A*100 # pos_gain 2
         kD_des = Nm2A*50  # vel_gain 0.0015 / 5
-
         axis.controller.config.pos_gain = kP_des/kD_des #Convert to Cascaded Gain Structure
         #https://github.com/madcowswe/ODrive/blob/451e79519637fdcf33f220f7dae9a28b15e014ba/Firmware/MotorControl/controller.cpp#L151
         axis.controller.config.vel_gain = kD_des
         axis.controller.config.vel_integrator_gain = 0
         axis.controller.pos_setpoint = 0
-
         #axis state
         #odrvs[leg][joint].axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
         axis.config.startup_closed_loop_control = True
@@ -439,4 +419,7 @@ def get_cnt_all():
     return positions
 
 def get_rad_all():
-    return count2Rad(get_cnt_all())
+	return count2Rad(get_cnt_all())
+
+if '__name__' == '__main__':
+	connect_all()

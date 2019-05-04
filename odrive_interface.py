@@ -188,7 +188,4 @@ class ODriveInterfaceAPI(object):
                 axis.controller.error = 0
         
         if axis_error:
-            return "error"
-        
-        
-        
+			return "error"
