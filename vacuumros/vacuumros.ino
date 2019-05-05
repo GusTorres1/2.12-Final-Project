@@ -1,7 +1,22 @@
 /*  To use this code, you must first have rosserial_python
- *  and from there you can use rosserial_arduino. Make
- *  sure that rosserial_arduino is running. Ask Jerry the
- *  TA for more clarification.
+ *  and from there you can use rosserial_arduino. 
+ *  
+ *  Here are the commands you must use to run the code.
+ *  
+ *  In a terminal run:
+ *  roscore
+ *  
+ *  In another terminal run:
+ *  rosrun rosserial_python serial_node.py /(port name - usually dev/ACM*)
+ *  (remember to run source /opt/ etc...)
+ *  
+ *  To ensure that you are subscribing, in another terminal run:
+ *  rostopic list
+ *  (you should see toggle_vac)
+ *  
+ *  To do standard testing on this node run:
+ *  rostopic pub /toggle_vac std_msgs/Int8 "data: _" 
+ *  Where '_' can be filled in with 0, 1, or 2.
  */
 
 #include <ros.h>
@@ -75,4 +90,4 @@ void stop_all(){
   digitalWrite(controlVac, HIGH); // stop both!
 
   digitalWrite(ledTest, LOW); // turn light off
-  }
+}

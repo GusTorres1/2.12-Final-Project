@@ -50,8 +50,7 @@ axis1 = None
 axis2 = None
 
 def rad2Count(angle):
-	
-	#THIS DOESN'T WORK
+    #THIS DOESN'T WORK
     try:
         return [100000-ang/CPR2RAD for ang in angle]
     except TypeError:
@@ -61,7 +60,7 @@ def r2c(angle):
     return rad2Count(angle)
 
 def count2Rad(count):
-	#THIS DOESN'T WORK
+    #THIS DOESN'T WORK
     try:
         return [(100000-cnt)*CPR2RAD for cnt in count]
     except TypeError:
@@ -136,9 +135,6 @@ def reboot_all():
     time.sleep(5)
     print("Done initializing! Reconnecting...")
     connect_all()
-
-connect_all()
-printPos()
 
 def vel_test_one(ii = 0, amt = 10000, mytime = 2):
 	axis = axes[ii]
@@ -419,7 +415,9 @@ def get_cnt_all():
     return positions
 
 def get_rad_all():
-	return count2Rad(get_cnt_all())
+    return count2Rad(get_cnt_all())
 
 if '__name__' == '__main__':
-	connect_all()
+    full_init()
+    connect_all()
+    test_all()
