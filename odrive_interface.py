@@ -183,6 +183,26 @@ class ODriveInterfaceAPI(object):
 	if not self.driver:
 	    self.logger.error("Not connected.")
 	    return
+	axes = [None, None]
+	axes[0] = self.driver.axis0
+	axes[1] = self.driver.axis1
+	kP_des = 2
+	kD_des = 0.0015 / 5	
+	for axis in axes:
+	    axis.motor.config.pre_calibrated = True
+	    axis.config.startup_encoder_index_search = True
+	    axis.config.startup_encoder_offset_calibration = True
+	    axis.controller.config.control_mode = CTRL_MODE_POSITION_CONTROL
+	    axis.controller.config.vel_gain = kD_des
+	    axis.controller.config.vel_integrator_gain = 0
+	    axis.controller.pos_setpoint = 0
+	    axis.config.startup_closed_loop_control = True
+	    axis.save_configuration()
+	    axis.reboot()
+	time.sleep(0.25)
+	for axis in axes:
+	    axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+	    axis.controller.config.control_mode = CTRL_MODE_POSITION_CONTROL	
 	self.left_axis.controller.pos_setpoint = left_motor_pos
 	self.right_axis.controller.pos_setpoint = right_motor_pos
         
