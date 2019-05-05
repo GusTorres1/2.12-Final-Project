@@ -47,11 +47,13 @@ class ODriveInterfaceAPI(object):
         self.disconnect()
 
     def connect(self, port=None, right_axis=0, timeout=30, serial_number=None):
+        print("for serious>?!")
         if self.driver:
             self.logger.info("Already connected. Disconnecting and reconnecting.")
         try:
+            print("Connected, dawg")
             self.driver = odrive.find_any(timeout=timeout, logger=self.logger, serial_number=serial_number)
-            self.axes = (self.driver.axis0, self.driver.axis1)
+            self.axes = (self.driver.axis0, self.driver.axis1) 
         except:
             self.logger.error("No ODrive found. Is device powered?")
             return False
@@ -82,7 +84,7 @@ class ODriveInterfaceAPI(object):
             return False
 
         try:
-            self.driver.release()
+            self.release()
         except:
             self.logger.error("Error in timer: " + traceback.format_exc())
             return False
@@ -164,7 +166,7 @@ class ODriveInterfaceAPI(object):
         if not self.driver:
             self.logger.error("Not connected.")
             return False
-        #self.logger.debug("Releasing.")
+        self.logger.debug("Releasing.")
         for axis in self.axes: 
             axis.requested_state = AXIS_STATE_IDLE
 
@@ -172,9 +174,10 @@ class ODriveInterfaceAPI(object):
         return True
     
     def full_init(self):
+        self.driver.config.brake_resistance = 0
         for axis in self.axes:
-            axis.config.brake_resistance = 0
-            axis.motor.config.current_lim = 5
+            axis.requested_state = AXIS_STATE_IDLE
+            axis.motor.config.current_lim =3 
             axis.motor.config.pole_pairs = 4
             axis.controller.config.vel_limit = 600000 #50000 counts/second is 1/8 revolution per second
             # 0.0612 [(revolutions/second)/Volt], 400000 counts per revolution
@@ -193,7 +196,7 @@ class ODriveInterfaceAPI(object):
                 axis.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
         print("Setup done, dawg.")
         kP_des = 2
-        kD_des = 0.0015 / 5
+        kD_des = 0.0003
         for axis in self.axes:
             axis.requested_state = AXIS_STATE_IDLE
             axis.motor.config.pre_calibrated = True
@@ -201,11 +204,16 @@ class ODriveInterfaceAPI(object):
             axis.config.startup_encoder_offset_calibration = True
             axis.controller.config.vel_gain = kD_des
             axis.controller.config.vel_integrator_gain = 0
+            axis.controller.config.pos_gain = 2.0
             axis.controller.pos_setpoint = 0
             axis.controller.vel_setpoint = 0            
             axis.config.startup_closed_loop_control = True
-            axis.save_configuration()
-            axis.reboot()
+        self.driver.save_configuration()
+        print("Saved, homie")
+        try:
+            self.driver.reboot()
+        except:
+            print('Rebooted')
         time.sleep(0.25)
         # Remember to run connect() again!
 
@@ -224,10 +232,13 @@ class ODriveInterfaceAPI(object):
             self.logger.error("Not connected.")
             return
         for axis in self.axes:
+            axis.controller.config.control_mode = CTRL_MODE_POSITION_CONTROL
             axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-            axis.controller.config.control_mode = CTRL_MODE_POSITION_CONTROL	
+        print(self.left_axis.controller.pos_setpoint, self.right_axis.controller.pos_setpoint)
         self.left_axis.controller.pos_setpoint = left_motor_pos
         self.right_axis.controller.pos_setpoint = right_motor_pos
+        print(self.left_axis.controller.pos_setpoint, self.right_axis.controller.pos_setpoint)
+
 
     def get_errors(self, clear=True):
         # TODO: add error parsing, see: https://github.com/madcowswe/ODrive/blob/master/tools/odrive/utils.py#L34
