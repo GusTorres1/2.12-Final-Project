@@ -137,33 +137,33 @@ def reboot_all():
     connect_all()
 
 def vel_test_one(ii = 0, amt = 10000, mytime = 2):
-	axis = axes[ii]
-	axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-	axis.controller.config.control_mode = CTRL_MODE_VELOCITY_CONTROL
-	axis.controller.vel_setpoint = 0
-	time.sleep(mytime)
-	print(0)
-	print_all()
-	time.sleep(0.25)
-	axis.controller.vel_setpoint = amt
-	time.sleep(mytime)
-	print(1)
-	print_all()
-	time.sleep(0.25)
-	axis.controller.vel_setpoint = 0
-	time.sleep(mytime)
-	print(2)
-	print_all()
-	time.sleep(0.25)
-	axis.controller.vel_setpoint = -amt
-	time.sleep(mytime)
-	print(3)
-	print_all() 
-	time.sleep(0.25)
-	axis.controller.vel_setpoint = 0
-	time.sleep(mytime)
-	print(4)
-	print_all()
+    axis = axes[ii]
+    axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+    axis.controller.config.control_mode = CTRL_MODE_VELOCITY_CONTROL
+    axis.controller.vel_setpoint = 0
+    time.sleep(mytime)
+    print(0)
+    print_all()
+    time.sleep(0.25)
+    axis.controller.vel_setpoint = amt
+    time.sleep(mytime)
+    print(1)
+    print_all()
+    time.sleep(0.25)
+    axis.controller.vel_setpoint = 0
+    time.sleep(mytime)
+    print(2)
+    print_all()
+    time.sleep(0.25)
+    axis.controller.vel_setpoint = -amt
+    time.sleep(mytime)
+    print(3)
+    print_all() 
+    time.sleep(0.25)
+    axis.controller.vel_setpoint = 0
+    time.sleep(mytime)
+    print(4)
+    print_all()
 
 def vel_test_all(amt = 30000, mytime = 2):
     count = 0
@@ -236,7 +236,7 @@ def trajMoveCnt(posDesired = (10000, 10000, 10000), velDesired = 50000, accDesir
         axis.controller.move_to_pos(posDesired[ii]) 
 
 def trajMoveRad(posDesired = (0, 0, 0), velDesired = 2*pi/8, accDesired = 2*pi/8):
-	#THIS DOESN'T WORK
+        #THIS DOESN'T WORK
     trajMoveCnt(rad2Count(posDesired), rad2Count(velDesired), rad2Count(accDesired))
 
 def test_one(ii = 0, amt = 10000, mytime = 5):
@@ -316,7 +316,7 @@ def set_gains(k_p, k_d, perm = True):
         odrvs[0].save_configuration()
         odrvs[1].save_configuration()
         time.sleep(2)
-    
+
 
 def set_gainsCounts(k_p, k_d,perm = True):
     for axis in axes:

@@ -37,13 +37,13 @@ class ODriveInterfaceAPI(object):
     connected = False
     _prerolled = False
     #engaged = False
-    
+
     def __init__(self, logger=None):
         self.logger = logger if logger else default_logger
-                
+
     def __del__(self):
         self.disconnect()
-                    
+
     def connect(self, port=None, right_axis=0, timeout=30, serial_number=None):
         if self.driver:
             self.logger.info("Already connected. Disconnecting and reconnecting.")
@@ -53,32 +53,32 @@ class ODriveInterfaceAPI(object):
         except:
             self.logger.error("No ODrive found. Is device powered?")
             return False
-            
+
         # save some parameters for easy access
         self.right_axis = self.driver.axis0 if right_axis == 0 else self.driver.axis1
         self.left_axis  = self.driver.axis1 if right_axis == 0 else self.driver.axis0
         self.encoder_cpr = self.driver.axis0.encoder.config.cpr
-        
+
         self.connected = True
         self.logger.info("Connected to ODrive. Hardware v%d.%d-%d, firmware v%d.%d.%d%s" % (
-                        self.driver.hw_version_major, self.driver.hw_version_minor, self.driver.hw_version_variant,
-                        self.driver.fw_version_major, self.driver.fw_version_minor, self.driver.fw_version_revision,
-                        "-dev" if self.driver.fw_version_unreleased else ""
-                        ))
+            self.driver.hw_version_major, self.driver.hw_version_minor, self.driver.hw_version_variant,
+            self.driver.fw_version_major, self.driver.fw_version_minor, self.driver.fw_version_revision,
+            "-dev" if self.driver.fw_version_unreleased else ""
+        ))
         return True
-        
+
     def disconnect(self):
         self.connected = False
         self.right_axis = None
         self.left_axis = None
-        
+
         self._prerolled = False
         #self.engaged = False
-        
+
         if not self.driver:
             self.logger.error("Not connected.")
             return False
-        
+
         try:
             self.driver.release()
         except:
@@ -92,9 +92,9 @@ class ODriveInterfaceAPI(object):
         if not self.driver:
             self.logger.error("Not connected.")
             return False
-        
+
         self.logger.info("Vbus %.2fV" % self.driver.vbus_voltage)
-        
+
         for i, axis in enumerate(self.axes):
             self.logger.info("Calibrating axis %d..." % i)
             axis.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
@@ -104,23 +104,23 @@ class ODriveInterfaceAPI(object):
             if axis.error != 0:
                 self.logger.error("Failed calibration with axis error 0x%x, motor error 0x%x" % (axis.error, axis.motor.error))
                 return False
-                
+
         return True
-        
+
     def preroll(self, wait=True):
         if not self.driver:
             self.logger.error("Not connected.")
             return False
-            
+
         if self._prerolled: # must be prerolling or already prerolled
             return False
-            
+
         #self.logger.info("Vbus %.2fV" % self.driver.vbus_voltage)
 
         for i, axis in enumerate(self.axes):
             self.logger.info("Index search preroll axis %d..." % i)
             axis.requested_state = AXIS_STATE_ENCODER_INDEX_SEARCH
-        
+
         if wait:
             for i, axis in enumerate(self.axes):
                 while axis.current_state != AXIS_STATE_IDLE:
@@ -131,19 +131,19 @@ class ODriveInterfaceAPI(object):
                     return False
         self._prerolled = True
         return True
-        
+
     def prerolling(self):
         return self.axes[0].current_state == AXIS_STATE_ENCODER_INDEX_SEARCH or self.axes[1].current_state == AXIS_STATE_ENCODER_INDEX_SEARCH
-    
+
     def prerolled(self): #
         return self._prerolled and not self.prerolling()
-    
+
     def engaged(self):
         return self.axes[0].current_state == AXIS_STATE_CLOSED_LOOP_CONTROL or self.axes[1].current_state == AXIS_STATE_CLOSED_LOOP_CONTROL
-    
+
     def idle(self):
         return self.axes[0].current_state == AXIS_STATE_IDLE and self.axes[1].current_state == AXIS_STATE_IDLE
-        
+
     def engage(self):
         if not self.driver:
             self.logger.error("Not connected.")
@@ -154,10 +154,10 @@ class ODriveInterfaceAPI(object):
             axis.controller.vel_setpoint = 0
             axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
             axis.controller.config.control_mode = CTRL_MODE_VELOCITY_CONTROL
-        
+
         #self.engaged = True
         return True
-        
+
     def release(self):
         if not self.driver:
             self.logger.error("Not connected.")
@@ -168,57 +168,52 @@ class ODriveInterfaceAPI(object):
 
         #self.engaged = False
         return True
-    
+
     def drive(self, left_motor_val, right_motor_val):
         if not self.driver:
             self.logger.error("Not connected.")
             return
-        #try:
         self.left_axis.controller.vel_setpoint = left_motor_val
         self.right_axis.controller.vel_setpoint = -right_motor_val
-        #except (fibre.protocol.ChannelBrokenException, AttributeError) as e:
-        #    raise ODriveFailure(str(e))
-	
+
     def drivePos(self, left_motor_pos, right_motor_pos):
-	if not self.driver:
-	    self.logger.error("Not connected.")
-	    return
-	axes = [None, None]
-	axes[0] = self.driver.axis0
-	axes[1] = self.driver.axis1
-	kP_des = 2
-	kD_des = 0.0015 / 5	
-	for axis in axes:
-	    axis.motor.config.pre_calibrated = True
-	    axis.config.startup_encoder_index_search = True
-	    axis.config.startup_encoder_offset_calibration = True
-	    axis.controller.config.control_mode = CTRL_MODE_POSITION_CONTROL
-	    axis.controller.config.vel_gain = kD_des
-	    axis.controller.config.vel_integrator_gain = 0
-	    axis.controller.pos_setpoint = 0
-	    axis.config.startup_closed_loop_control = True
-	    axis.save_configuration()
-	    axis.reboot()
-	time.sleep(0.25)
-	for axis in axes:
-	    axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-	    axis.controller.config.control_mode = CTRL_MODE_POSITION_CONTROL	
-	self.left_axis.controller.pos_setpoint = left_motor_pos
-	self.right_axis.controller.pos_setpoint = right_motor_pos
-        
+        if not self.driver:
+            self.logger.error("Not connected.")
+            return
+        kP_des = 2
+        kD_des = 0.0015 / 5	
+        for axis in self.axes:
+            axis.requested_state = AXIS_STATE_IDLE
+            axis.motor.config.pre_calibrated = True
+            axis.config.startup_encoder_index_search = True
+            axis.config.startup_encoder_offset_calibration = True
+            axis.controller.config.control_mode = CTRL_MODE_POSITION_CONTROL
+            axis.controller.config.vel_gain = kD_des
+            axis.controller.config.vel_integrator_gain = 0
+            axis.controller.pos_setpoint = 0
+            axis.config.startup_closed_loop_control = True
+            axis.save_configuration()
+            axis.reboot()
+        time.sleep(0.25)
+        for axis in self.axes:
+            axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+            axis.controller.config.control_mode = CTRL_MODE_POSITION_CONTROL	
+        self.left_axis.controller.pos_setpoint = left_motor_pos
+        self.right_axis.controller.pos_setpoint = right_motor_pos
+
     def get_errors(self, clear=True):
         # TODO: add error parsing, see: https://github.com/madcowswe/ODrive/blob/master/tools/odrive/utils.py#L34
         if not self.driver:
             return None
-            
+
         axis_error = self.axes[0].error or self.axes[1].error
-        
+
         if clear:
             for axis in self.axes:
                 axis.error = 0
                 axis.motor.error = 0
                 axis.encoder.error = 0
                 axis.controller.error = 0
-        
+
         if axis_error:
-			return "error"
+            return "error"
