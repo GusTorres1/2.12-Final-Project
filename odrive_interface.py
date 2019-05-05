@@ -1,7 +1,9 @@
 '''
 Originally copied from neomanic.
 Updates to the functionalities
-by san-soucie (John) and Sandra.
+by san-soucie (John) and Sandra,
+based off of the code from 
+DGonz.
 '''
 
 import serial
@@ -168,11 +170,52 @@ class ODriveInterfaceAPI(object):
 
         #self.engaged = False
         return True
+    
+    def full_init(self):
+        for axis in self.axes:
+            axis.config.brake_resistance = 0
+            axis.motor.config.current_lim = 5
+            axis.motor.config.pole_pairs = 4
+            axis.controller.config.vel_limit = 600000 #50000 counts/second is 1/8 revolution per second
+            # 0.0612 [(revolutions/second)/Volt], 400000 counts per revolution
+            # Max speed is 1.35 Revolutions/second, or 539000counts/second
+            axis.motor.config.motor_type = MOTOR_TYPE_HIGH_CURRENT
+            axis.encoder.config.cpr = 4000
+            axis.encoder.config.bandwidth = 1000
+            axis.encoder.config.use_index = True
+            axis.encoder.config.zero_count_on_find_idx = True
+            #axis.encoder.config.idx_search_speed = 1
+            axis.encoder.config.pre_calibrated = False
+            #motor calibration current
+            axis.motor.config.calibration_current = 5
+            #axis state
+            if(axis.motor.config.pre_calibrated == False):
+                axis.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
+        print("Setup done, dawg.")
+        kP_des = 2
+        kD_des = 0.0015 / 5
+        for axis in self.axes:
+            axis.requested_state = AXIS_STATE_IDLE
+            axis.motor.config.pre_calibrated = True
+            axis.config.startup_encoder_index_search = True
+            axis.config.startup_encoder_offset_calibration = True
+            axis.controller.config.vel_gain = kD_des
+            axis.controller.config.vel_integrator_gain = 0
+            axis.controller.pos_setpoint = 0
+            axis.controller.vel_setpoint = 0            
+            axis.config.startup_closed_loop_control = True
+            axis.save_configuration()
+            axis.reboot()
+        time.sleep(0.25)
+        # Remember to run connect() again!
 
     def drive(self, left_motor_val, right_motor_val):
         if not self.driver:
             self.logger.error("Not connected.")
             return
+        for axis in self.axes:
+            axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+            axis.controller.config.control_mode = CTRL_MODE_VELOCITY_CONTROL            
         self.left_axis.controller.vel_setpoint = left_motor_val
         self.right_axis.controller.vel_setpoint = -right_motor_val
 
@@ -180,21 +223,6 @@ class ODriveInterfaceAPI(object):
         if not self.driver:
             self.logger.error("Not connected.")
             return
-        kP_des = 2
-        kD_des = 0.0015 / 5	
-        for axis in self.axes:
-            axis.requested_state = AXIS_STATE_IDLE
-            axis.motor.config.pre_calibrated = True
-            axis.config.startup_encoder_index_search = True
-            axis.config.startup_encoder_offset_calibration = True
-            axis.controller.config.control_mode = CTRL_MODE_POSITION_CONTROL
-            axis.controller.config.vel_gain = kD_des
-            axis.controller.config.vel_integrator_gain = 0
-            axis.controller.pos_setpoint = 0
-            axis.config.startup_closed_loop_control = True
-            axis.save_configuration()
-            axis.reboot()
-        time.sleep(0.25)
         for axis in self.axes:
             axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
             axis.controller.config.control_mode = CTRL_MODE_POSITION_CONTROL	
