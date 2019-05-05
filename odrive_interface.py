@@ -1,3 +1,9 @@
+'''
+Originally copied from neomanic.
+Updates to the functionalities
+by san-soucie (John) and Sandra.
+'''
+
 import serial
 from serial.serialutil import SerialException
 
@@ -172,6 +178,13 @@ class ODriveInterfaceAPI(object):
         self.right_axis.controller.vel_setpoint = -right_motor_val
         #except (fibre.protocol.ChannelBrokenException, AttributeError) as e:
         #    raise ODriveFailure(str(e))
+	
+    def drivePos(self, left_motor_pos, right_motor_pos):
+	if not self.driver:
+	    self.logger.error("Not connected.")
+	    return
+	self.left_axis.controller.pos_setpoint = left_motor_pos
+	self.right_axis.controller.pos_setpoint = right_motor_pos
         
     def get_errors(self, clear=True):
         # TODO: add error parsing, see: https://github.com/madcowswe/ODrive/blob/master/tools/odrive/utils.py#L34
