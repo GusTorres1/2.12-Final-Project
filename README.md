@@ -1,5 +1,14 @@
 # 2.12 Updates
 
+#5/5/2019
+1. We finished the ODrive.
+2. We need the limit switches for zero-setpoint and do inverse kinematics.
+3. Make the ROS Node for the ODrive.
+4. Integration with the manipulator.
+5. Finish communication with the Mobile Robot.
+6. Finish the Computer Vision stack.
+7. Integrate the dough.
+
 # 5/1/2019 : Gustavo
 The segmentation HSV values have been found empirically.
 The Camera has been implemented on the frame.
