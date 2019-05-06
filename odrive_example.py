@@ -1,13 +1,25 @@
 from odrive_ros import odrive_interface
 od = odrive_interface.ODriveInterfaceAPI()
 
-od.connect(serial_number = '2086378C3548')
-od.calibrate()
+def runTwoMotors():
+    od.connect(serial_number = od.usb_serials[0])
+    od.calibrate()
+    
+    od.full_init()
+    od.connect(serial_number = od.usb_serials[0])
+    
+    od.drivePos(400000, 400000)
+    # Curiously enough, it says that axis1 is
+    # where the single motor is connected?
 
-# Once the above works:
-# uncomment the below:
-
-od.full_init()
-od.connect(serial_number = '2086378C3548')
-
-od.drivePos(400000, 400000)
+def runAllMotors():
+    '''
+    TODO: Test this, dawg.
+    '''
+    od.connect_all()
+    od.calibrate()
+    
+    od.full_init()
+    od.connect_all()
+    
+    od.trajMoveCount((0,0,0))

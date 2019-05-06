@@ -19,6 +19,27 @@ from odrive.enums import *
 
 import fibre
 
+pi = 3.1415927
+in2mm = 25.4
+mm2in = 1/in2mm
+in2m = in2mm/1000
+
+Nm2A = 0.00000604 #N*m/radian to A/count
+#https://www.wolframalpha.com/input/?i=(1+N*m%2Fradian)*(2*pi+radians%2F400000)*(1%2F(2.6+N*m%2FA))
+
+zeroVec = [[[0,0],[0,0]]]
+offsets = [[[-8.59,-6.11],[-3.61,5.89]]]
+thtDesired = [[[0,0],[0,0]]]
+velDesired = [[[0,0],[0,0]]]
+kP = [[[0,0],[0,0]]]
+kD = [[[0,0],[0,0]]]
+home_kp = [[[0,0],[0,0]]]
+home_kd = [[[0,0],[0,0]]]
+kPd = [[[0,0],[0,0]]]
+kDd = [[[0,0],[0,0]]]
+
+CPR2RAD = (2*math.pi/400000)
+
 default_logger = logging.getLogger(__name__)
 default_logger.setLevel(logging.DEBUG)
 
@@ -38,7 +59,14 @@ class ODriveInterfaceAPI(object):
     left_axis = None
     connected = False
     _prerolled = False
+    offset = 100000 # This must be changed according to the offset
+    # we get from the limit switches that we install.
     #engaged = False
+    axis0 = None
+    axis1 = None
+    axis2 = None
+    odrvs = [None, None]
+    usb_serials = ['2087377E3548', '2086378C3548']
 
     def __init__(self, logger=None):
         self.logger = logger if logger else default_logger
@@ -47,7 +75,7 @@ class ODriveInterfaceAPI(object):
         self.disconnect()
 
     def connect(self, port=None, right_axis=0, timeout=30, serial_number=None):
-        print("for serious>?!")
+        #print("for serious>?!")
         if self.driver:
             self.logger.info("Already connected. Disconnecting and reconnecting.")
         try:
@@ -70,19 +98,24 @@ class ODriveInterfaceAPI(object):
             "-dev" if self.driver.fw_version_unreleased else ""
         ))
         return True
+    
+    def connect_all(self):
+        for i in range(len(self.usb_serials)):
+            self.odrvs[i] = self.connect(serial_number=self.usb_serials[i])
+        self.axis0 = self.odrvs[0].axis0
+        self.axis1 = self.odrvs[0].axis1
+        self.axis2 = self.odrvs[1].axis0 # Or is this axis1? Good idea to check.
+        self.axes = [self.axis0, self.axis1, self.axis2]
 
     def disconnect(self):
         self.connected = False
         self.right_axis = None
         self.left_axis = None
-
         self._prerolled = False
         #self.engaged = False
-
         if not self.driver:
             self.logger.error("Not connected.")
             return False
-
         try:
             self.release()
         except:
@@ -93,12 +126,13 @@ class ODriveInterfaceAPI(object):
         return True
 
     def calibrate(self):
+        '''
+        Should now be able to calibrate all three motors
+        '''
         if not self.driver:
             self.logger.error("Not connected.")
             return False
-
         self.logger.info("Vbus %.2fV" % self.driver.vbus_voltage)
-
         for i, axis in enumerate(self.axes):
             self.logger.info("Calibrating axis %d..." % i)
             axis.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
@@ -108,58 +142,6 @@ class ODriveInterfaceAPI(object):
             if axis.error != 0:
                 self.logger.error("Failed calibration with axis error 0x%x, motor error 0x%x" % (axis.error, axis.motor.error))
                 return False
-
-        return True
-
-    def preroll(self, wait=True):
-        if not self.driver:
-            self.logger.error("Not connected.")
-            return False
-
-        if self._prerolled: # must be prerolling or already prerolled
-            return False
-
-        #self.logger.info("Vbus %.2fV" % self.driver.vbus_voltage)
-
-        for i, axis in enumerate(self.axes):
-            self.logger.info("Index search preroll axis %d..." % i)
-            axis.requested_state = AXIS_STATE_ENCODER_INDEX_SEARCH
-
-        if wait:
-            for i, axis in enumerate(self.axes):
-                while axis.current_state != AXIS_STATE_IDLE:
-                    time.sleep(0.1)
-            for i, axis in enumerate(self.axes):
-                if axis.error != 0:
-                    self.logger.error("Failed preroll with axis error 0x%x, motor error 0x%x" % (axis.error, axis.motor.error))
-                    return False
-        self._prerolled = True
-        return True
-
-    def prerolling(self):
-        return self.axes[0].current_state == AXIS_STATE_ENCODER_INDEX_SEARCH or self.axes[1].current_state == AXIS_STATE_ENCODER_INDEX_SEARCH
-
-    def prerolled(self): #
-        return self._prerolled and not self.prerolling()
-
-    def engaged(self):
-        return self.axes[0].current_state == AXIS_STATE_CLOSED_LOOP_CONTROL or self.axes[1].current_state == AXIS_STATE_CLOSED_LOOP_CONTROL
-
-    def idle(self):
-        return self.axes[0].current_state == AXIS_STATE_IDLE and self.axes[1].current_state == AXIS_STATE_IDLE
-
-    def engage(self):
-        if not self.driver:
-            self.logger.error("Not connected.")
-            return False
-
-        #self.logger.debug("Setting drive mode.")
-        for axis in self.axes:
-            axis.controller.vel_setpoint = 0
-            axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-            axis.controller.config.control_mode = CTRL_MODE_VELOCITY_CONTROL
-
-        #self.engaged = True
         return True
 
     def release(self):
@@ -169,12 +151,11 @@ class ODriveInterfaceAPI(object):
         self.logger.debug("Releasing.")
         for axis in self.axes: 
             axis.requested_state = AXIS_STATE_IDLE
-
-        #self.engaged = False
         return True
     
     def full_init(self):
-        self.driver.config.brake_resistance = 0
+        self.odrvs[0].config.brake_resistance = 0
+        self.odrvs[1].config.brake_resistance = 0
         for axis in self.axes:
             axis.requested_state = AXIS_STATE_IDLE
             axis.motor.config.current_lim =3 
@@ -208,10 +189,12 @@ class ODriveInterfaceAPI(object):
             axis.controller.pos_setpoint = 0
             axis.controller.vel_setpoint = 0            
             axis.config.startup_closed_loop_control = True
-        self.driver.save_configuration()
+        self.odrv[0].save_configuration()
+        self.odrv[1].save_configuration()
         print("Saved, homie")
         try:
-            self.driver.reboot()
+            self.odrv[0].reboot()
+            self.odrv[1].reboot()
         except:
             print('Rebooted')
         time.sleep(0.25)
@@ -222,10 +205,10 @@ class ODriveInterfaceAPI(object):
             self.logger.error("Not connected.")
             return
         for axis in self.axes:
-            axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-            axis.controller.config.control_mode = CTRL_MODE_VELOCITY_CONTROL            
+            axis.controller.config.control_mode = CTRL_MODE_VELOCITY_CONTROL
+            axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL            
         self.left_axis.controller.vel_setpoint = left_motor_val
-        self.right_axis.controller.vel_setpoint = -right_motor_val
+        self.right_axis.controller.vel_setpoint = right_motor_val
 
     def drivePos(self, left_motor_pos, right_motor_pos):
         if not self.driver:
@@ -234,12 +217,36 @@ class ODriveInterfaceAPI(object):
         for axis in self.axes:
             axis.controller.config.control_mode = CTRL_MODE_POSITION_CONTROL
             axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-        print(self.left_axis.controller.pos_setpoint, self.right_axis.controller.pos_setpoint)
+        #print(self.left_axis.controller.pos_setpoint, self.right_axis.controller.pos_setpoint)
         self.left_axis.controller.pos_setpoint = left_motor_pos
         self.right_axis.controller.pos_setpoint = right_motor_pos
-        print(self.left_axis.controller.pos_setpoint, self.right_axis.controller.pos_setpoint)
+        #print(self.left_axis.controller.pos_setpoint, self.right_axis.controller.pos_setpoint)
 
+    def trajMoveCnt(self, pos, vel=50000, acc=50000):
+        for i in range(len(self.axes)):
+            self.axes[i].controller.config.control_mode = CTRL_MODE_POSITION_CONTROL
+            self.axes[i].requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+            self.axes[i].trap_traj.config.vel_limit = vel #50000 = 1/8 rev per second
+            self.axes[i].trap_traj.config.accel_limit = acc #50000 = 1/8 rev per second^2
+            self.axes[i].trap_traj.config.decel_limit = acc
+            self.axes[i].controller.move_to_pos = pos[i]
+            print(self.axes[i].controller.pos_setpoint)
+            
+    def trajMovRad(self, pos, vel=2*pi/8, acc=2*pi/8):
+        self.trajMoveCnt(self.rad2Count(pos), self.rad2Count(vel), self.rad2Count(acc))
 
+    def rad2Count(self, angle):
+        try:
+            return [(self.offset-ang)/CPR2RAD for ang in angle]
+        except TypeError:
+            return (self.offset-angle)/CPR2RAD
+        
+    def count2Rad(self, count):
+        try:
+            return[(self.offset-cnt)*CPR2RAD for cnt in count]
+        except TypeError:
+            return (self.offset-count)*CPR2RAD
+        
     def get_errors(self, clear=True):
         # TODO: add error parsing, see: https://github.com/madcowswe/ODrive/blob/master/tools/odrive/utils.py#L34
         if not self.driver:
