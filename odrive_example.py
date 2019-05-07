@@ -22,4 +22,4 @@ def runAllMotors():
     od.full_init()
     od.connect_all()
     
-    od.trajMoveCount((0,0,0))
+    od.trajMoveCnt((0,0,0))

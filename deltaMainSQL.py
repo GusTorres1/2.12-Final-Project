@@ -2,15 +2,21 @@
 """
 Delta Robot Main Interface
 
+Based off of:
+
 Daniel J. Gonzalez - dgonz@mit.edu
 2.12 Intro to Robotics Spring 2019
+
+From Sandra:
+Included the odrive_interface code
+Let's run it to test!
 """
 #####################################
 realBot = True
 #####################################
 
 if realBot:
-    import robot212_odrive as bot
+    import odrive_interface as bot
 else:
     import robot212_virtual as bot
 
@@ -23,9 +29,13 @@ bot.trajMoveRad((0,0,0))
 deltaKin = kin.deltaSolver()
 
 if __name__ == "__main__":
+    bot.connect_all()
+    bot.calibrate()
+    
     bot.full_init()
-    bot.closed_loop_state_all()
-    bot.test_all()
+    bot.connect_all()
+    
+    bot.trajMoveCnt((0,0,0))
     isRunning = True
     mainRunning = True
     inp = input("Press ENTER to begin or q+ENTER to quit...")
