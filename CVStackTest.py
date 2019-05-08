@@ -20,6 +20,7 @@ offset = 94.5
 # captures picture and processes centroids
 def centroid_from_Picture():
     cap = cv2.VideoCapture(0)
+    cap.set(cv2.CAP_PROP_AUTOFOCUS, 0) # turn the autofocus off
     ret, frame = cap.read()
     cap.release()
     #frame = cv2.imread('picture.png')
@@ -31,10 +32,20 @@ def centroid_from_Picture():
     hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2HSV)
     shapes = getShapes(frame, hsv)
 
-    # centroids = getCentroids(shapes, gray)
+    toppings_centroids = getCentroids(shapes, frame)
     # centroids = getCentroids2(shapes,frame)
-    getCentroids2( shapes, frame )
+    # getCentroids2( shapes, frame )
     # return centroids
+
+    lineThickness = 6
+    for i in range(0, len(toppings_centroids)):
+        for top in toppings_centroids[i][1]:
+            cv2.line(frame, (top), (top[0] + 1, top[1]+1), (255, 255, 255), lineThickness)
+
+    cv2.imshow("Cool", frame)
+    cv2.waitKey(4000)
+
+    print(toppings_centroids)
 
 
 # should be tuples of (
@@ -59,10 +70,10 @@ def getShapes(image, h):
     for (c, l, u) in colors:
         mask = cv2.inRange(h, l, u)
         mod = morphologicalTrans(mask)
-        cv2.imshow('m',mask)
-        cv2.waitKey(1000)
-        cv2.imshow('mod',mod)
-        cv2.waitKey(1000)
+        #cv2.imshow('m',mask)
+        #cv2.waitKey(1000)
+        #cv2.imshow('mod',mod)
+        #cv2.waitKey(1000)
         masks.append(mod)
 
     # # gets first shape from image
@@ -78,40 +89,57 @@ def getShapes(image, h):
     return masks
 
 def getCentroids2(shapes,frame):
-    i = 0
-    c = spotCentroid( shapes[i] )
-    print(c)
+    ab = 1
+    for i in range(ab, ab+1):
+    	c = spotCentroid( shapes[i] )
+    	print(c)
 
+area_thresh = 75
 lower_thresh = 40
 def spotCentroid( mask ):
     thresh = mask
     #ret, thresh = cv2.threshold( mask, lower_thresh, 240, 0 )
-    contours, hierarchy = cv2.findContours( thresh, 1, 2 )
+    _, contours, _ = cv2.findContours( thresh, 1, 2 )
 
     M = [cv2.moments(contours[i]) for i in range(0, len(contours))]
-    cx = [(int(m['m10'] / m['m00'])) for m in M]
-    cy = [(int(m['m01'] / m['m00'])) for m in M]
+    cx = []
+    cy = []
+    for m in M:
+        if m['m00'] > area_thresh:
+            cx.append( int(m['m10'] / m['m00']) )
+            cy.append( int(m['m01'] / m['m00']) )
+        #print(m['m00'])
+    #cx = [(int(m['m10'] / m['m00'])) for m in M]
+    #cy = [(int(m['m01'] / m['m00'])) for m in M]
     cen = list(zip(cx, cy))
 
-    cv2.drawContours(mask, contours, -1, (255, 0, 0), 2)
-    lineThickness = 6
-    for i in range(0, len(cx)):
-        cv2.line(mask, (cx[i], cy[i]), (cx[i] + 1, cy[i] + 1), (120, 120, 0), lineThickness)
+    #cv2.drawContours(thresh, contours, -1, (255, 0, 0), 2)
+    #lineThickness = 6
+    #for i in range(0, len(cx)):
+     #   cv2.line(mask, (cx[i], cy[i]), (cx[i] + 1, cy[i] + 1), (120, 120, 0), lineThickness)
 
-    cv2.imshow("Cool", mask)
-    cv2.waitKey(2000)
+    #cv2.imshow("Cool", thresh)
+    #cv2.waitKey(2000)
     return cen
 
 # gets the centroid from segmentation
 def getCentroids(shapes, g):
-    ret, thresh = cv2.threshold(g, lower_thresh, 240, 0)
-    contours, hierarchy = cv2.findContours(thresh, 1, 2)
+    colors = ['red','blue','yellow','pink','brown','black']
+    i = 0
+    topping_locations = []
+    for mask in shapes:
+        tl = spotCentroid( mask )
+    	#thresh = mask
+    	#ret, thresh = cv2.threshold(g, lower_thresh, 240, 0)
+    	#_, contours, _ = cv2.findContours(thresh, 1, 2)
 
-    M = [cv2.moments(contours[i]) for i in range(0, len(contours))]
-    cx = [(int(m['m10'] / m['m00'])) for m in M]
-    cy = [(int(m['m01'] / m['m00'])) for m in M]
-    cen = list(zip(cx, cy))
-    return cen
+    	#M = [cv2.moments(contours[i]) for i in range(0, len(contours))]
+    	#cx = [(int(m['m10'] / m['m00'])) for m in M]
+    	#cy = [(int(m['m01'] / m['m00'])) for m in M]
+    	#cen = list(zip(cx, cy))
+        topping_locations.append((colors[i],tl))
+        i += 1
+    return topping_locations
 
 
 # processes all centroids for publishing
@@ -126,8 +154,8 @@ def camera_transfer(centroid_point):
 
 def morphologicalTrans(mask):
     # kernel = np.ones((5, 5), np.uint8)
-    # kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3))
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(5,5))
+    kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3))
+    # kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(5,5))
     # dilation = cv2.dilate(mask, kernel, iterations=2)
     # erosion = cv2.erode(dilation, kernel, iterations=5)
 
