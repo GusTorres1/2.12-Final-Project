@@ -1,6 +1,12 @@
 import cv2
 import numpy as np
 
+frame_scale = 1.5
+ycl = 27
+ych = 662
+xcl = 68
+xch = 700
+
 # get xy from centroids
 def getControl():
     cen = centroid_from_Picture()
@@ -12,37 +18,49 @@ offset = 94.5
 
 # captures picture and processes centroids
 def centroid_from_Picture():
-    # cap = cv2.VideoCapture(0)
-    # ret, frame = cap.read()
-    # cap.release()
-    frame = cv2.imread('picture.png')
-    frame = cv2.resize(frame, None, fx = 2., fy = 2. )
+    cap = cv2.VideoCapture(0)
+    ret, frame = cap.read()
+    cap.release()
+    #frame = cv2.imread('picture.png')
+    frame = cv2.resize(frame, None, fx = frame_scale, fy = frame_scale )
+    frame = frame[ ycl:ych, xcl:xch ]
+    blur = cv2.GaussianBlur( frame, (5,5), 0 )
+
     img = frame
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    shapes = getShapes(img, hsv)
-    # gray = cv2.cvtColor(shapes, cv2.COLOR_BGR2GRAY)
+    hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2HSV)
+    shapes = getShapes(frame, hsv)
+
     # centroids = getCentroids(shapes, gray)
-    centroids = getCentroids2(shapes)
+    centroids = getCentroids2(shapes,frame)
     return centroids
 
 
 # should be tuples of (
 # color (String),
 # lower bound (array), upper bound (array) )
-colors = [('red', np.array([177, 76, 92]), np.array([255, 255, 255])),
-          ('blue', np.array([52, 58, 77]), np.array([130, 255, 255])),
-          ('yellow', np.array([19, 57, 108]), np.array([87, 255, 255])),
-          ('pink', np.array([130, 89, 94]), np.array([173, 255, 255])),
-          ('brown', np.array([150, 47, 43]), np.array([180, 143, 88])),
-          ('black', np.array([52, 0, 0]), np.array([148, 74, 74]))]
-
+#colors = [('red', np.array([177, 76, 92]), np.array([255, 255, 255])),
+ #         ('blue', np.array([52, 58, 77]), np.array([130, 255, 255])),
+  #        ('yellow', np.array([19, 57, 108]), np.array([87, 255, 255])),
+   #       ('yellow', np.array([19, 57, 108]), np.array([87, 255, 255])),
+    #      ('brown', np.array([150, 47, 43]), np.array([180, 143, 88])),
+     #     ('black', np.array([52, 0, 0]), np.array([148, 74, 74]))]
+colors = [('red', np.array([0, 187, 46]), np.array([179, 255, 132]) ),
+	('blue', np.array([65, 69, 77]), np.array([142, 255, 255]) ),
+	('yellow', np.array([0, 64, 146]), np.array([65, 255, 255]) ),
+	('pink', np.array([159, 77, 113]), np.array([179, 212, 255]) ),
+	('brown', np.array([16, 102, 42]), np.array([171, 255, 93]) ),
+	('black', np.array([0, 0, 0]), np.array([179, 71, 67]) )]
 
 # creates color segmentation of the workspace.
 def getShapes(image, h):
     masks = []
     for (c, l, u) in colors:
-        mask = cv2.inRange(h, np.array(l), np.array(u))
+        mask = cv2.inRange(h, l, u)
         mod = morphologicalTrans(mask)
+	cv2.imshow('m',mask)
+	cv2.waitKey(1000)
+	cv2.imshow('mod',mod)
+	cv2.waitKey(1000)
         masks.append(mod)
 
     # # gets first shape from image
@@ -59,10 +77,10 @@ def getShapes(image, h):
 
 
 lower_thresh = 30
-def getCentroids2(shapes):
+def getCentroids2(shapes,frame):
     i = 5
-    # cv2.imshow('shapes', shapes[i])
-    # cv2.waitKey(1000)
+    frame = frame[ ycl:ych, xcl:xch ]
+    blur = cv2.GaussianBlur( frame, (5,5), 0 )
     c = spotCentroid( shapes[i] )
     print(c)
 
@@ -108,7 +126,7 @@ def camera_transfer(centroid_point):
 
 def morphologicalTrans(mask):
     # kernel = np.ones((5, 5), np.uint8)
-    kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (5, 5))
+    kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3))
     # dilation = cv2.dilate(mask, kernel, iterations=2)
     # erosion = cv2.erode(dilation, kernel, iterations=5)
 
