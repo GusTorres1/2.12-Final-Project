@@ -25,7 +25,7 @@ class ODriveNode(object):
         self.vac_pub = rospy.Publisher('/toggle_vac', Int8, queue_size = 1)
         self.cam_pub = rospy.Publisher('/camera_move', Bool, queue_size = 1)
         
-        self.thtDes = [0.1, 0.1, 0.1]
+        self.thtDes = [0, 0, 0]
         bot.connect_all()
         print('ready')
 
@@ -64,6 +64,8 @@ class ODriveNode(object):
         in2m = in2mm/1000
         
         while not rospy.is_shutdown():
+            '''
+            Testing the vac ros node comm
             rospy.sleep(0.1)
             self.vac_pub.publish(2)
             rospy.sleep(0.5)
@@ -72,6 +74,7 @@ class ODriveNode(object):
             self.vac_pub.publish(0)
             rospy.sleep(0.1)
             self.vac_pub.publish(1)
+            '''
             
             #try:
                 #main_rate.sleep()
