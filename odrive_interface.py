@@ -13,6 +13,7 @@ import sys
 import time
 import logging
 import traceback
+import math
 
 import odrive
 from odrive.enums import *
@@ -59,7 +60,7 @@ class ODriveInterfaceAPI(object):
     left_axis = None
     connected = False
     _prerolled = False
-    offset = 100000 # This must be changed according to the offset
+    offset = 0 # This must be changed according to the offset
     # we get from the limit switches that we install.
     #engaged = False
     axis0 = None
@@ -101,7 +102,8 @@ class ODriveInterfaceAPI(object):
     
     def connect_all(self):
         for i in range(len(self.usb_serials)):
-            self.odrvs[i] = self.connect(serial_number=self.usb_serials[i])
+            self.connect(serial_number=self.usb_serials[i])
+            self.odrvs[i] = self.driver
         self.axis0 = self.odrvs[0].axis0
         self.axis1 = self.odrvs[0].axis1
         self.axis2 = self.odrvs[1].axis0 # Or is this axis1? Good idea to check.
@@ -229,10 +231,10 @@ class ODriveInterfaceAPI(object):
             self.axes[i].trap_traj.config.vel_limit = vel #50000 = 1/8 rev per second
             self.axes[i].trap_traj.config.accel_limit = acc #50000 = 1/8 rev per second^2
             self.axes[i].trap_traj.config.decel_limit = acc
-            self.axes[i].controller.move_to_pos = pos[i]
-            print(self.axes[i].controller.pos_setpoint)
+            self.axes[i].controller.pos_setpoint = pos[i]
+            #print(self.axes[i].controller.pos_setpoint)
             
-    def trajMovRad(self, pos, vel=2*pi/8, acc=2*pi/8):
+    def trajMoveRad(self, pos, vel=2*pi/8, acc=2*pi/8):
         self.trajMoveCnt(self.rad2Count(pos), self.rad2Count(vel), self.rad2Count(acc))
 
     def rad2Count(self, angle):
