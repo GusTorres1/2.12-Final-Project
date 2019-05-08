@@ -22,10 +22,15 @@ in2mm = 25.4
 mm2in = 1/in2mm
 in2m = in2mm/1000
 
-#TODO: Put these values in, fool
-zhome = 0
-ztable = 0
-zdrop = 0
+#Operating heights
+#zhome = -680 #mm
+#ztable = -795 #mm
+#zdrop = -750 #mm
+
+# Testing parameters:
+zhome = -750
+ztable = -795
+zdrop = -850
 
 class ODriveNode(object):
     def __init__(self):
@@ -34,24 +39,36 @@ class ODriveNode(object):
         self.command_queue = Queue.Queue(maxsize=5)
         rospy.Subscriber('/pos', Float32MultiArray, self.cmd_callback)
         #rospy.Subscriber('/what_task', Int8, self.task_callback)
+        self.task_comp = True
+        
+        self.pizzaTop = True
+        self.topDrop = False
+        self.movePizza = False
+        self.punchDough = False
+        self.parmShake = False
+        
+        self.task_comp = True
         
         self.vac_pub = rospy.Publisher('/toggle_vac', Int8, queue_size = 1)
         self.task_pub = rospy.Publisher('/task_complete', Bool, queue_size = 1)
         
+        self.task_pub.publish(self.task_comp)
+
+        
         self.thtDes = [0, 0, 0]
         bot.connect_all()
         print('ready')
-        
-        self.task_comp = False
 
     def cmd_callback(self, msg):
-        #print('hello')
+        print('hello')
         if self.task_comp: # Only get the position values if task is complete
+            print("Let's get started")
             self.pos = msg.data # Get the proper value from the dictionary
+            self.pos = list(self.pos)
             if self.pizzaTop == True:
-                self.pos.append(ztable)
-            elif self.topDrop == True:
-                self.pos.append(zdrop)
+                self.pos.append(zhome)
+            if self.topDrop == True:
+                self.pos[2]=(zdrop)
             self.thtDes = deltaKin.solveIt(self.pos)
     
     '''   
@@ -96,11 +113,6 @@ class ODriveNode(object):
             rospy.sleep(0.1)
             self.vac_pub.publish(1)
             '''
-            self.pizzaTop = True
-            self.topDrop = False
-            self.movePizza = False
-            self.punchDough = False
-            self.parmShake = False
             
             try:
                 main_rate.sleep()
@@ -108,27 +120,39 @@ class ODriveNode(object):
                 break
             if self.pizzaTop:
                 for i in range(9):
+                    print("Let's grab the topping.")
                     self.task_comp = False
                     self.task_pub.publish(self.task_comp)
-                    bot.trajMoveRad(self.thtDes, 2*pi/8, 2*pi/8)                
                     self.vac_pub.publish(vacInt)
-                    rospy.sleep(0.1)
+                    bot.trajMoveRad(self.thtDes, 2*pi/8, 2*pi/8)
+                    print(self.pos)
+                    rospy.sleep(0.3)
                     if self.ifClose(self.thtDes):
-                        self.vac_pub.publish(0)
-                        self.task_comp = True
-                        self.task_pub.publish(self.task_comp)
-                        self.topDrop = True
+                        posGrip = [self.pos[0], self.pos[1], ztable]
+                        thtGrip = deltaKin.solveIt(posGrip)
+                        bot.trajMoveRad(thtGrip)
+                        print(posGrip)
+                        rospy.sleep(0.5)
+                        if self.ifClose(thtGrip):
+                            self.topDrop = True
+                            self.vac_pub.publish(0)
+                            self.task_comp = True
+                            self.task_pub.publish(self.task_comp)
+                            rospy.sleep(0.1)
                     if self.topDrop:
+                        print("Drop it.")
                         self.task_comp = False
                         self.task_pub.publish(self.task_comp)
-                        bot.trajMoveRad(self.thtDes, 2*pi/8, 2*pi/8) 
-                        rospy.sleep(0.1)
+                        bot.trajMoveRad(self.thtDes, 2*pi/8, 2*pi/8)
+                        print(self.pos)
+                        rospy.sleep(0.5)
                         if self.ifClose(self.thtDes):
                             self.vac_pub.publish(1)
                             rospy.sleep(0.1)
                             self.vac_pub.publish(2)
-                            self.task_comp = True
                             self.topDrop = False
+                            self.task_comp = True
+                print("Let's move the pizza now.")
                 self.movePizza = True
             if self.movePizza:
                 pass # TODO: Write code
