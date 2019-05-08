@@ -9,8 +9,9 @@ xch = 700
 
 # get xy from centroids
 def getControl():
-    cen = centroid_from_Picture()
-    return xy_from_centroid(cen)
+    centroid_from_Picture()
+    #cen = centroid_from_Picture()
+    return xy_from_centroid(1)
 
 
 offset = 94.5
@@ -31,8 +32,9 @@ def centroid_from_Picture():
     shapes = getShapes(frame, hsv)
 
     # centroids = getCentroids(shapes, gray)
-    centroids = getCentroids2(shapes,frame)
-    return centroids
+    # centroids = getCentroids2(shapes,frame)
+    getCentroids2( shapes, frame )
+    # return centroids
 
 
 # should be tuples of (
@@ -57,10 +59,10 @@ def getShapes(image, h):
     for (c, l, u) in colors:
         mask = cv2.inRange(h, l, u)
         mod = morphologicalTrans(mask)
-	cv2.imshow('m',mask)
-	cv2.waitKey(1000)
-	cv2.imshow('mod',mod)
-	cv2.waitKey(1000)
+        cv2.imshow('m',mask)
+        cv2.waitKey(1000)
+        cv2.imshow('mod',mod)
+        cv2.waitKey(1000)
         masks.append(mod)
 
     # # gets first shape from image
@@ -75,17 +77,15 @@ def getShapes(image, h):
     # cv2.waitKey(1000)
     return masks
 
-
-lower_thresh = 30
 def getCentroids2(shapes,frame):
-    i = 5
-    frame = frame[ ycl:ych, xcl:xch ]
-    blur = cv2.GaussianBlur( frame, (5,5), 0 )
+    i = 0
     c = spotCentroid( shapes[i] )
     print(c)
 
+lower_thresh = 40
 def spotCentroid( mask ):
-    ret, thresh = cv2.threshold( mask, lower_thresh, 240, 0 )
+    thresh = mask
+    #ret, thresh = cv2.threshold( mask, lower_thresh, 240, 0 )
     contours, hierarchy = cv2.findContours( thresh, 1, 2 )
 
     M = [cv2.moments(contours[i]) for i in range(0, len(contours))]
@@ -126,7 +126,8 @@ def camera_transfer(centroid_point):
 
 def morphologicalTrans(mask):
     # kernel = np.ones((5, 5), np.uint8)
-    kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3))
+    # kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3))
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(5,5))
     # dilation = cv2.dilate(mask, kernel, iterations=2)
     # erosion = cv2.erode(dilation, kernel, iterations=5)
 

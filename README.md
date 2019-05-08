@@ -7,7 +7,7 @@
 4. Integration with the manipulator.
 5. Finish communication with the Mobile Robot.
 6. Finish the Computer Vision stack.
-7. Integrate the dough.
+7. Integrate the dough rolling (play-do)
 
 # 5/1/2019 : Gustavo
 The segmentation HSV values have been found empirically.
