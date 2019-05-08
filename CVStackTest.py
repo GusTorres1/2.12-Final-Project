@@ -63,7 +63,8 @@ def getCentroids2(shapes):
     i = 5
     # cv2.imshow('shapes', shapes[i])
     # cv2.waitKey(1000)
-    print(spotCentroid( shapes[i] ))
+    c = spotCentroid( shapes[i] )
+    print(c)
 
 def spotCentroid( mask ):
     ret, thresh = cv2.threshold( mask, lower_thresh, 240, 0 )
