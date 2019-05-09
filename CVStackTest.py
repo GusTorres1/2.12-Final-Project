@@ -174,9 +174,19 @@ def xy_from_centroid(centroid_points):
     result = list(map(camera_transfer, centroid_points))
     return result
 
+# in cm !
+posx = 28.5
+posy = 24.5
+negx = -31
+negy = -29
+mx = (posx-negx)/(xch-xcl)
+my = (posy-negy)/(ych-ycl)
 # converts a centroid point to a camera function
 def camera_transfer(centroid_point):
-    return centroid_point
+    (cx,cy) = centroid_point
+    del_rox = (posx-negx)-mx*(cx-10)
+    del_roy = (posy-negy) - my*(cy-10)
+    return (del_rox,del_roy)
 
 def morphologicalTrans(mask):
     # kernel = np.ones((5, 5), np.uint8)
