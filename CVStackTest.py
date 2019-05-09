@@ -13,7 +13,13 @@ def getControl():
     # pizza_location = [0,0,0]
     cen = centroids_from_Picture()
     #cen = centroid_from_Picture()
-    toppi = chooseToppings(cen)
+    (frame,toppi) = chooseToppings(cen)
+    lineThickness = 6
+    for i in range(0, len(toppi)):
+        cv2.line(frame, toppi[i], (toppi[i][0] + 1, toppi[i][1]+1), (255, 255, 255), lineThickness)
+
+    cv2.imshow("Cool", frame)
+    cv2.waitKey(4000)
     return xy_from_centroid(toppi)
 
 offset = 94.5
@@ -62,15 +68,8 @@ def centroids_from_Picture():
     # centroids = getCentroids2(shapes,frame)
     # getCentroids2( shapes, frame )
     # return centroids
-    lineThickness = 6
-    for i in range(0, len(toppings_centroids)):
-        for top in toppings_centroids[i][1]:
-            cv2.line(frame, (top), (top[0] + 1, top[1]+1), (255, 255, 255), lineThickness)
-
-    cv2.imshow("Cool", frame)
-    cv2.waitKey(4000)
     print(toppings_centroids)
-    return chooseToppings( toppings_centroids )
+    return (frame,chooseToppings( toppings_centroids ))
     
 
 # should be tuples of (
