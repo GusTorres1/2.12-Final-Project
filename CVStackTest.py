@@ -10,17 +10,41 @@ pizza_location = [0,0,0]
 
 # get xy from centroids
 def getControl():
-    centroids_from_Picture()
+    # pizza_location = [0,0,0]
+    cen = centroids_from_Picture()
     #cen = centroid_from_Picture()
-    return xy_from_centroid(1)
+    toppi = chooseToppings(cen)
+    return xy_from_centroid(toppi)
 
 offset = 94.5
 
 def chooseToppings( topp ):
-    pass
+    pizza_tops = set(topp['red'])
+    tops = []
+    anch = topp['blue']
+    ham = topp['pink']
+    pep = topp['brown']
+    olive = topp['black']
+    pine = topp['yellow']
+    stuff = [anch, ham, pep, olive, pine]
+    le = [len(anch), len(ham), len(pep), len(olive), len(pine)]
+    ml = max(le)
+    for i in range(0,len(ml)):
+        for s in stuff:
+            if len(s) <= i:
+                tops.append(s[i])
+    return tops
+
+# def getCurr( list_top ):
+#     for t in list_top:
+        
+    
+# def withinPizza( topp ):
+#     pass
 
 # captures picture and processes centroids
 def centroids_from_Picture():
+    pizza_location = [0, 0, 0]
     cap = cv2.VideoCapture(0)
     cap.set(cv2.CAP_PROP_AUTOFOCUS, 0) # turn the autofocus off
     ret, frame = cap.read()
@@ -46,6 +70,8 @@ def centroids_from_Picture():
     cv2.imshow("Cool", frame)
     cv2.waitKey(4000)
     print(toppings_centroids)
+    return chooseToppings( toppings_centroids )
+    
 
 # should be tuples of (
 # color (String),
@@ -164,7 +190,8 @@ def morphologicalTrans(mask):
     return opening
 
 if __name__ == '__main__':
-    centroids_from_Picture()
+    #centroids_from_Picture()
+    getControl()
     # try:
     #     Centroid()
     # except rospy.ROSInterruptException:
