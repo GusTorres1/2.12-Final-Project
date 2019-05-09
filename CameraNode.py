@@ -19,6 +19,7 @@ def Centroid():
             pub.publish(ci)
             tup = (pizza_location[0],pizza_location[1])
             pub.publish(tup)
+            rospy.sleep(0.3)
         #pub.publish(control_inputs)
         #rate.sleep()
 
