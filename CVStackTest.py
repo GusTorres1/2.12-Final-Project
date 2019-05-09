@@ -174,10 +174,10 @@ def xy_from_centroid(centroid_points):
     return result
 
 # in cm !
-posx = 28.5
-posy = 24.5
-negx = -31
-negy = -29
+posx = 28.5*10
+posy = 24.5*10
+negx = -31*10
+negy = -29*10
 mx = (posx-negx)/(xch-xcl)
 my = (posy-negy)/(ych-ycl)
 # converts a centroid point to a camera function
@@ -200,7 +200,7 @@ def morphologicalTrans(mask):
 
 if __name__ == '__main__':
     #centroids_from_Picture()
-    getControl()
+    print( getControl() )
     # try:
     #     Centroid()
     # except rospy.ROSInterruptException:
