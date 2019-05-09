@@ -16,7 +16,7 @@ while True:
     frame = frame[ ycl:ych, xcl:xch ]
     cv2.imshow('cool',frame)
     #frame = frame[0:440, 100:560]
-    #cv2.imwrite("picture.png",frame)
+    cv2.imwrite("test.png",frame)
     if cv2.waitKey(10) & 0xFF == ord('b'):
         break
 

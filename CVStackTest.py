@@ -11,21 +11,24 @@ pizza_location = [0,0,0]
 # get xy from centroids
 def getControl():
     # pizza_location = [0,0,0]
-    cen = centroids_from_Picture()
+    ( frame, toppi ) = centroids_from_Picture()
     #cen = centroid_from_Picture()
-    (frame,toppi) = chooseToppings(cen)
+    print('bool')
+    print(toppi)
+    #toppi = chooseToppings(cen)
     lineThickness = 6
     for i in range(0, len(toppi)):
         cv2.line(frame, toppi[i], (toppi[i][0] + 1, toppi[i][1]+1), (255, 255, 255), lineThickness)
 
     cv2.imshow("Cool", frame)
-    cv2.waitKey(4000)
+    cv2.waitKey(2500)
     return xy_from_centroid(toppi)
 
 offset = 94.5
 
 def chooseToppings( topp ):
-    pizza_tops = set(topp['red'])
+    #print(topp)
+    pizza_tops = topp['red']
     tops = []
     anch = topp['blue']
     ham = topp['pink']
@@ -35,9 +38,9 @@ def chooseToppings( topp ):
     stuff = [anch, ham, pep, olive, pine]
     le = [len(anch), len(ham), len(pep), len(olive), len(pine)]
     ml = max(le)
-    for i in range(0,len(ml)):
+    for i in range(0,ml):
         for s in stuff:
-            if len(s) <= i:
+            if i < len(s):
                 tops.append(s[i])
     return tops
 
@@ -65,11 +68,11 @@ def centroids_from_Picture():
     shapes = getShapes(frame, hsv)
 
     toppings_centroids = getCentroids(shapes, frame)
-    # centroids = getCentroids2(shapes,frame)
+    # centroids = getCentroids2(shapesW,frame)
     # getCentroids2( shapes, frame )
     # return centroids
-    print(toppings_centroids)
-    return (frame,chooseToppings( toppings_centroids ))
+    #print(toppings_centroids)
+    return (frame, chooseToppings( toppings_centroids ))
     
 
 # should be tuples of (
@@ -152,6 +155,7 @@ def getCentroids(shapes, g):
     colors = ['red','blue','yellow','pink','brown','black']
     #colors = ['pizza', 'anch', '']
     #i = 0
+    #print(shapes)
     topping_locations = {}
     for i in range(0,len(shapes)):
         #tl = spotCentroid( mask, colors[i] )
@@ -163,7 +167,11 @@ def getCentroids(shapes, g):
     	#cy = [(int(m['m01'] / m['m00'])) for m in M]
     	#cen = list(zip(cx, cy))
         # topping_locations.append((colors[i],tl))
+        #cv2.imshow('f',shapes[i])
+        #cv2.waitKey(2000)
         tl = spotCentroid( shapes[i], colors[i] )
+        #print(colors[i])
+        #print(tl)
         topping_locations[ colors[i] ] = tl
         #i += 1
     return topping_locations
@@ -183,7 +191,7 @@ my = (posy-negy)/(ych-ycl)
 # converts a centroid point to a camera function
 def camera_transfer(centroid_point):
     (cx,cy) = centroid_point
-    del_rox = (posx-negx)-mx*(cx-10)
+    del_rox = (posx-negx) - mx*(cx-10)
     del_roy = (posy-negy) - my*(cy-10)
     return (del_rox,del_roy)
 
@@ -198,9 +206,20 @@ def morphologicalTrans(mask):
     # closing = cv2.morphologyEx(mask, cv2.MORPH_GRADIENT, kernel)
     return opening
 
+# if __name__ == '__main__':
+#     #centroids_from_Picture()
+#     getControl()
+#     # try:
+#     #     Centroid()
+#     # except rospy.ROSInterruptException:
+#     #     pass
+
 if __name__ == '__main__':
     #centroids_from_Picture()
     print( getControl() )
+    print(pizza_location)
+    c = camera_transfer((pizza_location[0],pizza_location[1]))
+    print(c)
     # try:
     #     Centroid()
     # except rospy.ROSInterruptException:
