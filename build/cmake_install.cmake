@@ -117,6 +117,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/robot/Final/2.12-Final-Project/build/gtest/cmake_install.cmake")
+  include("/home/robot/Final/2.12-Final-Project/build/odrive_ros/cmake_install.cmake")
 
 endif()
 

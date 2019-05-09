@@ -1,0 +1,8 @@
+prefix=/home/robot/Final/2.12-Final-Project/devel
+
+Name: odrive_ros
+Description: Description of odrive_ros
+Version: 0.4.0
+Cflags: 
+Libs: -L/home/robot/Final/2.12-Final-Project/devel/lib 
+Requires: 

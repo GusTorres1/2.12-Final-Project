@@ -28,30 +28,30 @@ The CXX compiler identification is GNU, found in "/home/robot/Final/2.12-Final-P
 Determining if the C compiler works passed with the following output:
 Change Dir: /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTryCompileExec2870547658/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec2870547658.dir/build.make CMakeFiles/cmTryCompileExec2870547658.dir/build
+Run Build Command:"/usr/bin/make" "cmTryCompileExec3447132446/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3447132446.dir/build.make CMakeFiles/cmTryCompileExec3447132446.dir/build
 make[1]: Entering directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 /usr/local/bin/cmake -E cmake_progress_report /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec2870547658.dir/testCCompiler.c.o
-/usr/bin/cc   -Wreturn-type -Wuninitialized     -o CMakeFiles/cmTryCompileExec2870547658.dir/testCCompiler.c.o   -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/testCCompiler.c
-Linking C executable cmTryCompileExec2870547658
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2870547658.dir/link.txt --verbose=1
-/usr/bin/cc   -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec2870547658.dir/testCCompiler.c.o  -o cmTryCompileExec2870547658 -rdynamic 
+Building C object CMakeFiles/cmTryCompileExec3447132446.dir/testCCompiler.c.o
+/usr/bin/cc   -Wreturn-type -Wuninitialized     -o CMakeFiles/cmTryCompileExec3447132446.dir/testCCompiler.c.o   -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTryCompileExec3447132446
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3447132446.dir/link.txt --verbose=1
+/usr/bin/cc   -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec3447132446.dir/testCCompiler.c.o  -o cmTryCompileExec3447132446 -rdynamic 
 make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 
 
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTryCompileExec4113110339/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec4113110339.dir/build.make CMakeFiles/cmTryCompileExec4113110339.dir/build
+Run Build Command:"/usr/bin/make" "cmTryCompileExec1506146146/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1506146146.dir/build.make CMakeFiles/cmTryCompileExec1506146146.dir/build
 make[1]: Entering directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 /usr/local/bin/cmake -E cmake_progress_report /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec4113110339.dir/CMakeCCompilerABI.c.o
-/usr/bin/cc   -Wreturn-type -Wuninitialized     -o CMakeFiles/cmTryCompileExec4113110339.dir/CMakeCCompilerABI.c.o   -c /usr/local/share/cmake-3.2/Modules/CMakeCCompilerABI.c
-Linking C executable cmTryCompileExec4113110339
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4113110339.dir/link.txt --verbose=1
-/usr/bin/cc   -Wreturn-type -Wuninitialized     -v CMakeFiles/cmTryCompileExec4113110339.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec4113110339 -rdynamic  
+Building C object CMakeFiles/cmTryCompileExec1506146146.dir/CMakeCCompilerABI.c.o
+/usr/bin/cc   -Wreturn-type -Wuninitialized     -o CMakeFiles/cmTryCompileExec1506146146.dir/CMakeCCompilerABI.c.o   -c /usr/local/share/cmake-3.2/Modules/CMakeCCompilerABI.c
+Linking C executable cmTryCompileExec1506146146
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1506146146.dir/link.txt --verbose=1
+/usr/bin/cc   -Wreturn-type -Wuninitialized     -v CMakeFiles/cmTryCompileExec1506146146.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec1506146146 -rdynamic  
 Using built-in specs.
 COLLECT_GCC=/usr/bin/cc
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper
@@ -61,8 +61,8 @@ Thread model: posix
 gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.10) 
 COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-Wreturn-type' '-Wuninitialized' '-v' '-o' 'cmTryCompileExec4113110339' '-rdynamic' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-linux-gnu/5/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/5/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper -plugin-opt=-fresolution=/tmp/ccpRsD40.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec4113110339 /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/5/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/5 -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/5/../../.. CMakeFiles/cmTryCompileExec4113110339.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/5/crtend.o /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-Wreturn-type' '-Wuninitialized' '-v' '-o' 'cmTryCompileExec1506146146' '-rdynamic' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/5/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/5/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper -plugin-opt=-fresolution=/tmp/cchH4q78.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec1506146146 /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/5/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/5 -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/5/../../.. CMakeFiles/cmTryCompileExec1506146146.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/5/crtend.o /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crtn.o
 make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 
 
@@ -70,15 +70,15 @@ Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTryCompileExec4113110339/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTryCompileExec4113110339.dir/build.make CMakeFiles/cmTryCompileExec4113110339.dir/build]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTryCompileExec1506146146/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTryCompileExec1506146146.dir/build.make CMakeFiles/cmTryCompileExec1506146146.dir/build]
   ignore line: [make[1]: Entering directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp']
   ignore line: [/usr/local/bin/cmake -E cmake_progress_report /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
-  ignore line: [Building C object CMakeFiles/cmTryCompileExec4113110339.dir/CMakeCCompilerABI.c.o]
-  ignore line: [/usr/bin/cc   -Wreturn-type -Wuninitialized     -o CMakeFiles/cmTryCompileExec4113110339.dir/CMakeCCompilerABI.c.o   -c /usr/local/share/cmake-3.2/Modules/CMakeCCompilerABI.c]
-  ignore line: [Linking C executable cmTryCompileExec4113110339]
-  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4113110339.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/cc   -Wreturn-type -Wuninitialized     -v CMakeFiles/cmTryCompileExec4113110339.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec4113110339 -rdynamic  ]
+  ignore line: [Building C object CMakeFiles/cmTryCompileExec1506146146.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/cc   -Wreturn-type -Wuninitialized     -o CMakeFiles/cmTryCompileExec1506146146.dir/CMakeCCompilerABI.c.o   -c /usr/local/share/cmake-3.2/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTryCompileExec1506146146]
+  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1506146146.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/cc   -Wreturn-type -Wuninitialized     -v CMakeFiles/cmTryCompileExec1506146146.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec1506146146 -rdynamic  ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/cc]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper]
@@ -88,13 +88,13 @@ Parsed C implicit link information from above output:
   ignore line: [gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.10) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-Wreturn-type' '-Wuninitialized' '-v' '-o' 'cmTryCompileExec4113110339' '-rdynamic' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-linux-gnu/5/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/5/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper -plugin-opt=-fresolution=/tmp/ccpRsD40.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec4113110339 /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/5/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/5 -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/5/../../.. CMakeFiles/cmTryCompileExec4113110339.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/5/crtend.o /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-Wreturn-type' '-Wuninitialized' '-v' '-o' 'cmTryCompileExec1506146146' '-rdynamic' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/5/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/5/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper -plugin-opt=-fresolution=/tmp/cchH4q78.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec1506146146 /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/5/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/5 -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/5/../../.. CMakeFiles/cmTryCompileExec1506146146.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/5/crtend.o /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crtn.o]
     arg [/usr/lib/gcc/x86_64-linux-gnu/5/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/5/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccpRsD40.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/cchH4q78.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -112,7 +112,7 @@ Parsed C implicit link information from above output:
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTryCompileExec4113110339] ==> ignore
+    arg [cmTryCompileExec1506146146] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crt1.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crti.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/5/crtbegin.o] ==> ignore
@@ -124,7 +124,7 @@ Parsed C implicit link information from above output:
     arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/x86_64-linux-gnu/5/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/5/../../..]
-    arg [CMakeFiles/cmTryCompileExec4113110339.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTryCompileExec1506146146.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [--as-needed] ==> ignore
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -158,15 +158,15 @@ Parsed C implicit link information from above output:
 Detecting C [-std=c11] compiler features compiled with the following output:
 Change Dir: /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTryCompileExec160350411/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec160350411.dir/build.make CMakeFiles/cmTryCompileExec160350411.dir/build
+Run Build Command:"/usr/bin/make" "cmTryCompileExec1845289652/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1845289652.dir/build.make CMakeFiles/cmTryCompileExec1845289652.dir/build
 make[1]: Entering directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 /usr/local/bin/cmake -E cmake_progress_report /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec160350411.dir/feature_tests.c.o
-/usr/bin/cc   -Wreturn-type -Wuninitialized     -std=c11 -o CMakeFiles/cmTryCompileExec160350411.dir/feature_tests.c.o   -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/feature_tests.c
-Linking C executable cmTryCompileExec160350411
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec160350411.dir/link.txt --verbose=1
-/usr/bin/cc   -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec160350411.dir/feature_tests.c.o  -o cmTryCompileExec160350411 -rdynamic 
+Building C object CMakeFiles/cmTryCompileExec1845289652.dir/feature_tests.c.o
+/usr/bin/cc   -Wreturn-type -Wuninitialized     -std=c11 -o CMakeFiles/cmTryCompileExec1845289652.dir/feature_tests.c.o   -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/feature_tests.c
+Linking C executable cmTryCompileExec1845289652
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1845289652.dir/link.txt --verbose=1
+/usr/bin/cc   -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec1845289652.dir/feature_tests.c.o  -o cmTryCompileExec1845289652 -rdynamic 
 make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 
 
@@ -179,15 +179,15 @@ make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFile
 Detecting C [-std=c99] compiler features compiled with the following output:
 Change Dir: /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTryCompileExec1194663456/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec1194663456.dir/build.make CMakeFiles/cmTryCompileExec1194663456.dir/build
+Run Build Command:"/usr/bin/make" "cmTryCompileExec1159972411/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1159972411.dir/build.make CMakeFiles/cmTryCompileExec1159972411.dir/build
 make[1]: Entering directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 /usr/local/bin/cmake -E cmake_progress_report /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec1194663456.dir/feature_tests.c.o
-/usr/bin/cc   -Wreturn-type -Wuninitialized     -std=c99 -o CMakeFiles/cmTryCompileExec1194663456.dir/feature_tests.c.o   -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/feature_tests.c
-Linking C executable cmTryCompileExec1194663456
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1194663456.dir/link.txt --verbose=1
-/usr/bin/cc   -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec1194663456.dir/feature_tests.c.o  -o cmTryCompileExec1194663456 -rdynamic 
+Building C object CMakeFiles/cmTryCompileExec1159972411.dir/feature_tests.c.o
+/usr/bin/cc   -Wreturn-type -Wuninitialized     -std=c99 -o CMakeFiles/cmTryCompileExec1159972411.dir/feature_tests.c.o   -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/feature_tests.c
+Linking C executable cmTryCompileExec1159972411
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1159972411.dir/link.txt --verbose=1
+/usr/bin/cc   -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec1159972411.dir/feature_tests.c.o  -o cmTryCompileExec1159972411 -rdynamic 
 make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 
 
@@ -200,15 +200,15 @@ make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFile
 Detecting C [-std=c90] compiler features compiled with the following output:
 Change Dir: /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTryCompileExec3337384934/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec3337384934.dir/build.make CMakeFiles/cmTryCompileExec3337384934.dir/build
+Run Build Command:"/usr/bin/make" "cmTryCompileExec494438480/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec494438480.dir/build.make CMakeFiles/cmTryCompileExec494438480.dir/build
 make[1]: Entering directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 /usr/local/bin/cmake -E cmake_progress_report /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec3337384934.dir/feature_tests.c.o
-/usr/bin/cc   -Wreturn-type -Wuninitialized     -std=c90 -o CMakeFiles/cmTryCompileExec3337384934.dir/feature_tests.c.o   -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/feature_tests.c
-Linking C executable cmTryCompileExec3337384934
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3337384934.dir/link.txt --verbose=1
-/usr/bin/cc   -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec3337384934.dir/feature_tests.c.o  -o cmTryCompileExec3337384934 -rdynamic 
+Building C object CMakeFiles/cmTryCompileExec494438480.dir/feature_tests.c.o
+/usr/bin/cc   -Wreturn-type -Wuninitialized     -std=c90 -o CMakeFiles/cmTryCompileExec494438480.dir/feature_tests.c.o   -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/feature_tests.c
+Linking C executable cmTryCompileExec494438480
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec494438480.dir/link.txt --verbose=1
+/usr/bin/cc   -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec494438480.dir/feature_tests.c.o  -o cmTryCompileExec494438480 -rdynamic 
 make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 
 
@@ -219,30 +219,30 @@ make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFile
 Determining if the CXX compiler works passed with the following output:
 Change Dir: /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTryCompileExec112715446/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec112715446.dir/build.make CMakeFiles/cmTryCompileExec112715446.dir/build
+Run Build Command:"/usr/bin/make" "cmTryCompileExec798912240/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec798912240.dir/build.make CMakeFiles/cmTryCompileExec798912240.dir/build
 make[1]: Entering directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 /usr/local/bin/cmake -E cmake_progress_report /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec112715446.dir/testCXXCompiler.cxx.o
-/usr/bin/c++    -Wreturn-type -Wuninitialized     -o CMakeFiles/cmTryCompileExec112715446.dir/testCXXCompiler.cxx.o -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTryCompileExec112715446
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec112715446.dir/link.txt --verbose=1
-/usr/bin/c++    -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec112715446.dir/testCXXCompiler.cxx.o  -o cmTryCompileExec112715446 -rdynamic 
+Building CXX object CMakeFiles/cmTryCompileExec798912240.dir/testCXXCompiler.cxx.o
+/usr/bin/c++    -Wreturn-type -Wuninitialized     -o CMakeFiles/cmTryCompileExec798912240.dir/testCXXCompiler.cxx.o -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTryCompileExec798912240
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec798912240.dir/link.txt --verbose=1
+/usr/bin/c++    -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec798912240.dir/testCXXCompiler.cxx.o  -o cmTryCompileExec798912240 -rdynamic 
 make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTryCompileExec1494250588/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec1494250588.dir/build.make CMakeFiles/cmTryCompileExec1494250588.dir/build
+Run Build Command:"/usr/bin/make" "cmTryCompileExec2704364166/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2704364166.dir/build.make CMakeFiles/cmTryCompileExec2704364166.dir/build
 make[1]: Entering directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 /usr/local/bin/cmake -E cmake_progress_report /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec1494250588.dir/CMakeCXXCompilerABI.cpp.o
-/usr/bin/c++    -Wreturn-type -Wuninitialized     -o CMakeFiles/cmTryCompileExec1494250588.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.2/Modules/CMakeCXXCompilerABI.cpp
-Linking CXX executable cmTryCompileExec1494250588
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1494250588.dir/link.txt --verbose=1
-/usr/bin/c++    -Wreturn-type -Wuninitialized     -v CMakeFiles/cmTryCompileExec1494250588.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec1494250588 -rdynamic  
+Building CXX object CMakeFiles/cmTryCompileExec2704364166.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/c++    -Wreturn-type -Wuninitialized     -o CMakeFiles/cmTryCompileExec2704364166.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.2/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTryCompileExec2704364166
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2704364166.dir/link.txt --verbose=1
+/usr/bin/c++    -Wreturn-type -Wuninitialized     -v CMakeFiles/cmTryCompileExec2704364166.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec2704364166 -rdynamic  
 Using built-in specs.
 COLLECT_GCC=/usr/bin/c++
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper
@@ -252,8 +252,8 @@ Thread model: posix
 gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.10) 
 COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-Wreturn-type' '-Wuninitialized' '-v' '-o' 'cmTryCompileExec1494250588' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-linux-gnu/5/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/5/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper -plugin-opt=-fresolution=/tmp/cc7QPR6h.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec1494250588 /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/5/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/5 -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/5/../../.. CMakeFiles/cmTryCompileExec1494250588.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/5/crtend.o /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-Wreturn-type' '-Wuninitialized' '-v' '-o' 'cmTryCompileExec2704364166' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/5/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/5/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper -plugin-opt=-fresolution=/tmp/ccTNpRnq.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec2704364166 /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/5/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/5 -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/5/../../.. CMakeFiles/cmTryCompileExec2704364166.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/5/crtend.o /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crtn.o
 make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 
 
@@ -261,15 +261,15 @@ Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTryCompileExec1494250588/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTryCompileExec1494250588.dir/build.make CMakeFiles/cmTryCompileExec1494250588.dir/build]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTryCompileExec2704364166/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTryCompileExec2704364166.dir/build.make CMakeFiles/cmTryCompileExec2704364166.dir/build]
   ignore line: [make[1]: Entering directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp']
   ignore line: [/usr/local/bin/cmake -E cmake_progress_report /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
-  ignore line: [Building CXX object CMakeFiles/cmTryCompileExec1494250588.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/usr/bin/c++    -Wreturn-type -Wuninitialized     -o CMakeFiles/cmTryCompileExec1494250588.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.2/Modules/CMakeCXXCompilerABI.cpp]
-  ignore line: [Linking CXX executable cmTryCompileExec1494250588]
-  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1494250588.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/c++    -Wreturn-type -Wuninitialized     -v CMakeFiles/cmTryCompileExec1494250588.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec1494250588 -rdynamic  ]
+  ignore line: [Building CXX object CMakeFiles/cmTryCompileExec2704364166.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/c++    -Wreturn-type -Wuninitialized     -o CMakeFiles/cmTryCompileExec2704364166.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.2/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTryCompileExec2704364166]
+  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2704364166.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/c++    -Wreturn-type -Wuninitialized     -v CMakeFiles/cmTryCompileExec2704364166.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec2704364166 -rdynamic  ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/c++]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper]
@@ -279,13 +279,13 @@ Parsed CXX implicit link information from above output:
   ignore line: [gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.10) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/5/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/5/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-Wreturn-type' '-Wuninitialized' '-v' '-o' 'cmTryCompileExec1494250588' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-linux-gnu/5/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/5/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper -plugin-opt=-fresolution=/tmp/cc7QPR6h.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec1494250588 /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/5/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/5 -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/5/../../.. CMakeFiles/cmTryCompileExec1494250588.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/5/crtend.o /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-Wreturn-type' '-Wuninitialized' '-v' '-o' 'cmTryCompileExec2704364166' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/5/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/5/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper -plugin-opt=-fresolution=/tmp/ccTNpRnq.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTryCompileExec2704364166 /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/5/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/5 -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/5/../../.. CMakeFiles/cmTryCompileExec2704364166.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/5/crtend.o /usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crtn.o]
     arg [/usr/lib/gcc/x86_64-linux-gnu/5/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/5/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/cc7QPR6h.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccTNpRnq.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -303,7 +303,7 @@ Parsed CXX implicit link information from above output:
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTryCompileExec1494250588] ==> ignore
+    arg [cmTryCompileExec2704364166] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crt1.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crti.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/5/crtbegin.o] ==> ignore
@@ -315,7 +315,7 @@ Parsed CXX implicit link information from above output:
     arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/x86_64-linux-gnu/5/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/5/../../..]
-    arg [CMakeFiles/cmTryCompileExec1494250588.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTryCompileExec2704364166.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -347,15 +347,15 @@ Parsed CXX implicit link information from above output:
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
 Change Dir: /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTryCompileExec2494860484/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec2494860484.dir/build.make CMakeFiles/cmTryCompileExec2494860484.dir/build
+Run Build Command:"/usr/bin/make" "cmTryCompileExec2995249240/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2995249240.dir/build.make CMakeFiles/cmTryCompileExec2995249240.dir/build
 make[1]: Entering directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 /usr/local/bin/cmake -E cmake_progress_report /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec2494860484.dir/feature_tests.cxx.o
-/usr/bin/c++    -Wreturn-type -Wuninitialized     -std=c++14 -o CMakeFiles/cmTryCompileExec2494860484.dir/feature_tests.cxx.o -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTryCompileExec2494860484
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2494860484.dir/link.txt --verbose=1
-/usr/bin/c++    -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec2494860484.dir/feature_tests.cxx.o  -o cmTryCompileExec2494860484 -rdynamic 
+Building CXX object CMakeFiles/cmTryCompileExec2995249240.dir/feature_tests.cxx.o
+/usr/bin/c++    -Wreturn-type -Wuninitialized     -std=c++14 -o CMakeFiles/cmTryCompileExec2995249240.dir/feature_tests.cxx.o -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTryCompileExec2995249240
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2995249240.dir/link.txt --verbose=1
+/usr/bin/c++    -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec2995249240.dir/feature_tests.cxx.o  -o cmTryCompileExec2995249240 -rdynamic 
 make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 
 
@@ -421,15 +421,15 @@ make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFile
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
 Change Dir: /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTryCompileExec4148645215/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec4148645215.dir/build.make CMakeFiles/cmTryCompileExec4148645215.dir/build
+Run Build Command:"/usr/bin/make" "cmTryCompileExec3435737500/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3435737500.dir/build.make CMakeFiles/cmTryCompileExec3435737500.dir/build
 make[1]: Entering directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 /usr/local/bin/cmake -E cmake_progress_report /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec4148645215.dir/feature_tests.cxx.o
-/usr/bin/c++    -Wreturn-type -Wuninitialized     -std=c++11 -o CMakeFiles/cmTryCompileExec4148645215.dir/feature_tests.cxx.o -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTryCompileExec4148645215
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4148645215.dir/link.txt --verbose=1
-/usr/bin/c++    -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec4148645215.dir/feature_tests.cxx.o  -o cmTryCompileExec4148645215 -rdynamic 
+Building CXX object CMakeFiles/cmTryCompileExec3435737500.dir/feature_tests.cxx.o
+/usr/bin/c++    -Wreturn-type -Wuninitialized     -std=c++11 -o CMakeFiles/cmTryCompileExec3435737500.dir/feature_tests.cxx.o -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTryCompileExec3435737500
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3435737500.dir/link.txt --verbose=1
+/usr/bin/c++    -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec3435737500.dir/feature_tests.cxx.o  -o cmTryCompileExec3435737500 -rdynamic 
 make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 
 
@@ -495,15 +495,15 @@ make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFile
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
 Change Dir: /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTryCompileExec444918618/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec444918618.dir/build.make CMakeFiles/cmTryCompileExec444918618.dir/build
+Run Build Command:"/usr/bin/make" "cmTryCompileExec1693319001/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1693319001.dir/build.make CMakeFiles/cmTryCompileExec1693319001.dir/build
 make[1]: Entering directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 /usr/local/bin/cmake -E cmake_progress_report /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec444918618.dir/feature_tests.cxx.o
-/usr/bin/c++    -Wreturn-type -Wuninitialized     -std=c++98 -o CMakeFiles/cmTryCompileExec444918618.dir/feature_tests.cxx.o -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTryCompileExec444918618
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec444918618.dir/link.txt --verbose=1
-/usr/bin/c++    -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec444918618.dir/feature_tests.cxx.o  -o cmTryCompileExec444918618 -rdynamic 
+Building CXX object CMakeFiles/cmTryCompileExec1693319001.dir/feature_tests.cxx.o
+/usr/bin/c++    -Wreturn-type -Wuninitialized     -std=c++98 -o CMakeFiles/cmTryCompileExec1693319001.dir/feature_tests.cxx.o -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTryCompileExec1693319001
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1693319001.dir/link.txt --verbose=1
+/usr/bin/c++    -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec1693319001.dir/feature_tests.cxx.o  -o cmTryCompileExec1693319001 -rdynamic 
 make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 
 
@@ -567,30 +567,30 @@ make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFile
 Determining if files pthread.h exist passed with the following output:
 Change Dir: /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTryCompileExec973279318/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec973279318.dir/build.make CMakeFiles/cmTryCompileExec973279318.dir/build
+Run Build Command:"/usr/bin/make" "cmTryCompileExec2277768830/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2277768830.dir/build.make CMakeFiles/cmTryCompileExec2277768830.dir/build
 make[1]: Entering directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 /usr/local/bin/cmake -E cmake_progress_report /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec973279318.dir/CheckIncludeFiles.c.o
-/usr/bin/cc   -Wreturn-type -Wuninitialized     -o CMakeFiles/cmTryCompileExec973279318.dir/CheckIncludeFiles.c.o   -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
-Linking C executable cmTryCompileExec973279318
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec973279318.dir/link.txt --verbose=1
-/usr/bin/cc   -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec973279318.dir/CheckIncludeFiles.c.o  -o cmTryCompileExec973279318 -rdynamic 
+Building C object CMakeFiles/cmTryCompileExec2277768830.dir/CheckIncludeFiles.c.o
+/usr/bin/cc   -Wreturn-type -Wuninitialized     -o CMakeFiles/cmTryCompileExec2277768830.dir/CheckIncludeFiles.c.o   -c /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+Linking C executable cmTryCompileExec2277768830
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2277768830.dir/link.txt --verbose=1
+/usr/bin/cc   -Wreturn-type -Wuninitialized      CMakeFiles/cmTryCompileExec2277768830.dir/CheckIncludeFiles.c.o  -o cmTryCompileExec2277768830 -rdynamic 
 make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 
 
 Determining if the function pthread_create exists in the pthread passed with the following output:
 Change Dir: /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTryCompileExec3049447114/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec3049447114.dir/build.make CMakeFiles/cmTryCompileExec3049447114.dir/build
+Run Build Command:"/usr/bin/make" "cmTryCompileExec3574342608/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3574342608.dir/build.make CMakeFiles/cmTryCompileExec3574342608.dir/build
 make[1]: Entering directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 /usr/local/bin/cmake -E cmake_progress_report /home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec3049447114.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -Wreturn-type -Wuninitialized  -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec3049447114.dir/CheckFunctionExists.c.o   -c /usr/local/share/cmake-3.2/Modules/CheckFunctionExists.c
-Linking C executable cmTryCompileExec3049447114
-/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3049447114.dir/link.txt --verbose=1
-/usr/bin/cc   -Wreturn-type -Wuninitialized  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec3049447114.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3049447114 -rdynamic -lpthread 
+Building C object CMakeFiles/cmTryCompileExec3574342608.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -Wreturn-type -Wuninitialized  -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec3574342608.dir/CheckFunctionExists.c.o   -c /usr/local/share/cmake-3.2/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3574342608
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3574342608.dir/link.txt --verbose=1
+/usr/bin/cc   -Wreturn-type -Wuninitialized  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec3574342608.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3574342608 -rdynamic -lpthread 
 make[1]: Leaving directory '/home/robot/Final/2.12-Final-Project/build/CMakeFiles/CMakeTmp'
 
 
