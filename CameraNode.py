@@ -73,6 +73,18 @@ def chooseToppings( topp ):
 # def withinPizza( topp ):
 #     pass
 
+def useCam( booo ):
+    if booo:
+        cap = cv2.VideoCapture(0)
+        cap.set(cv2.CAP_PROP_AUTOFOCUS, 0) # turn the autofocus off
+        ret, frame = cap.read()
+        cap.release()
+        frame = cv2.resize(frame, None, fx = frame_scale, fy = frame_scale )
+        frame = frame[ ycl:ych, xcl:xch ]
+        return frame
+    else:
+        return cv2.imread('test.png')
+
 # captures picture and processes centroids
 def centroids_from_Picture():
     pizza_location = [0, 0, 0]
@@ -80,7 +92,8 @@ def centroids_from_Picture():
     #cap.set(cv2.CAP_PROP_AUTOFOCUS, 0) # turn the autofocus off
     #ret, frame = cap.read()
     #cap.release()
-    frame = cv2.imread('test.png')
+    frame = useCam( False );
+    #frame = cv2.imread('test.png')
     #frame = cv2.resize(frame, None, fx = frame_scale, fy = frame_scale )
     #frame = frame[ ycl:ych, xcl:xch ]
     blur = cv2.GaussianBlur( frame, (5,5), 0 )
