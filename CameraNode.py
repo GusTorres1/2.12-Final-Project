@@ -5,18 +5,22 @@ import cv2
 import numpy as np
 
 #topic for publishing
-input_topic = 'Centroid_Data'
-output_topic = 'Motor_Control'
+input_topic = '/pos'
+output_topic = '/pos'
 # publishes centroid and verifies when to take a new picture
 def Centroid():
     rospy.init_node('Shapes', anonymous=True)
     pub = rospy.Publisher(input_topic, String, queue_size=10)
-    rate = rospy.Rate(10) # 10hz
+    #rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
         #current ROS upper level logic
         control_inputs = getControl()
-        pub.publish(control_inputs)
-        rate.sleep()
+        for ci in control_inputs:
+            pub.publish(ci)
+            tup = (pizza_location[0],pizza_location[1])
+            pub.publish(tup)
+        #pub.publish(control_inputs)
+        #rate.sleep()
 
 frame_scale = 1.5
 ycl = 27
