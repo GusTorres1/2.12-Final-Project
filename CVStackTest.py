@@ -54,13 +54,13 @@ def chooseToppings( topp ):
 # captures picture and processes centroids
 def centroids_from_Picture():
     pizza_location = [0, 0, 0]
-    cap = cv2.VideoCapture(0)
-    cap.set(cv2.CAP_PROP_AUTOFOCUS, 0) # turn the autofocus off
-    ret, frame = cap.read()
-    cap.release()
-    #frame = cv2.imread('picture.png')
-    frame = cv2.resize(frame, None, fx = frame_scale, fy = frame_scale )
-    frame = frame[ ycl:ych, xcl:xch ]
+    #cap = cv2.VideoCapture(0)
+    #cap.set(cv2.CAP_PROP_AUTOFOCUS, 0) # turn the autofocus off
+    #ret, frame = cap.read()
+    #cap.release()
+    frame = cv2.imread('test.png')
+    #frame = cv2.resize(frame, None, fx = frame_scale, fy = frame_scale )
+    #frame = frame[ ycl:ych, xcl:xch ]
     blur = cv2.GaussianBlur( frame, (5,5), 0 )
 
     img = frame
@@ -191,8 +191,8 @@ my = (posy-negy)/(ych-ycl)
 # converts a centroid point to a camera function
 def camera_transfer(centroid_point):
     (cx,cy) = centroid_point
-    del_rox = (posx-negx) - mx*(cx-10)
-    del_roy = (posy-negy) - my*(cy-10)
+    del_rox = negx + mx*(cy-10)
+    del_roy = negy + my*(cx-10)
     return (del_rox,del_roy)
 
 def morphologicalTrans(mask):
