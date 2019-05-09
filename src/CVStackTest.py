@@ -60,7 +60,7 @@ def useCam( booo ):
         frame = cv2.resize(frame, None, fx = frame_scale, fy = frame_scale )
         frame = frame[ ycl:ych, xcl:xch ]
         return frame
-     else:
+    else:
         return cv2.imread('test.png')
 
 # captures picture and processes centroids
