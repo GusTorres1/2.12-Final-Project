@@ -68,7 +68,7 @@ class ODriveNode(object):
             self.pos.append(zhome)
             if self.topDrop == True:
                 self.pos[2]=(zdrop)
-            if self.movePizza = True:
+            if self.movePizza:
                 theta = np.atan2(pos[0], pos[1]-(tab/2-2)*in2mm)
                 self.pos[0] -= np.sin(theta)*(pizRad+balRad)*in2mm
                 self.pos[1] += np.cos(theta)*(pizRad+balRad)*in2mm
