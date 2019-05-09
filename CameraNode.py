@@ -32,9 +32,9 @@ pizza_location = [0,0,0]
 # get xy from centroids
 def getControl():
     # pizza_location = [0,0,0]
-    cen = centroids_from_Picture()
+    ( frame, cen ) = centroids_from_Picture()
     #cen = centroid_from_Picture()
-    (frame,toppi) = chooseToppings(cen)
+    toppi = chooseToppings(cen)
     lineThickness = 6
     for i in range(0, len(toppi)):
         cv2.line(frame, toppi[i], (toppi[i][0] + 1, toppi[i][1]+1), (255, 255, 255), lineThickness)
