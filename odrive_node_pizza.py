@@ -1,6 +1,8 @@
 #!/usr/bin/env python
-
 import rospy
+
+#import communication # For communicating with the mobile robot
+#mobile_ready = rospy.get_param('/MOBILE_ARRIVED')
 
 from std_msgs.msg import Float32MultiArray, Int8, Bool
 
@@ -10,6 +12,8 @@ bot = odrive_interface.ODriveInterfaceAPI()
 import kinematicsSolverEdited as kin
 from time import sleep
 import Queue
+
+import numpy as np
 
 deltaKin = kin.deltaSolver()
 
@@ -23,14 +27,13 @@ mm2in = 1/in2mm
 in2m = in2mm/1000
 
 #Operating heights
-#zhome = -680 #mm
-#ztable = -795 #mm
-#zdrop = -750 #mm
+zhome = -730 #mm
+ztable = -795 #mm
+zdrop = -750 #mm
+yhome = - 300 #mm
+xhome = 0 #mm
 
-# Testing parameters:
-zhome = -750
-ztable = -795
-zdrop = -850
+homeTht = deltaKin.solveIt([xhome, yhome, zhome])
 
 class ODriveNode(object):
     def __init__(self):
@@ -52,9 +55,6 @@ class ODriveNode(object):
         self.vac_pub = rospy.Publisher('/toggle_vac', Int8, queue_size = 1)
         self.task_pub = rospy.Publisher('/task_complete', Bool, queue_size = 1)
         
-        self.task_pub.publish(self.task_comp)
-
-        
         self.thtDes = [0, 0, 0]
         bot.connect_all()
         print('ready')
@@ -65,10 +65,13 @@ class ODriveNode(object):
             print("Let's get started")
             self.pos = msg.data # Get the proper value from the dictionary
             self.pos = list(self.pos)
-            if self.pizzaTop == True:
-                self.pos.append(zhome)
+            self.pos.append(zhome)
             if self.topDrop == True:
                 self.pos[2]=(zdrop)
+            if self.movePizza = True:
+                theta = np.atan2(pos[0], pos[1]-(tab/2-2)*in2mm)
+                self.pos[0] -= np.sin(theta)*(pizRad+balRad)*in2mm
+                self.pos[1] += np.cos(theta)*(pizRad+balRad)*in2mm
             self.thtDes = deltaKin.solveIt(self.pos)
     
     '''   
@@ -120,18 +123,22 @@ class ODriveNode(object):
                 break
             if self.pizzaTop:
                 for i in range(9):
+                    print("Let's take a pic.")
+                    bot.trajMoveRad(homeTht)
+                    self.task_pub.publish(self.task_comp)
+                    rospy.sleep(0.1)
                     print("Let's grab the topping.")
                     self.task_comp = False
                     self.task_pub.publish(self.task_comp)
                     self.vac_pub.publish(vacInt)
                     bot.trajMoveRad(self.thtDes, 2*pi/8, 2*pi/8)
-                    print(self.pos)
+                    #print(self.pos)
                     rospy.sleep(0.3)
                     if self.ifClose(self.thtDes):
                         posGrip = [self.pos[0], self.pos[1], ztable]
                         thtGrip = deltaKin.solveIt(posGrip)
                         bot.trajMoveRad(thtGrip)
-                        print(posGrip)
+                        #print(posGrip)
                         rospy.sleep(0.5)
                         if self.ifClose(thtGrip):
                             self.topDrop = True
@@ -144,7 +151,7 @@ class ODriveNode(object):
                         self.task_comp = False
                         self.task_pub.publish(self.task_comp)
                         bot.trajMoveRad(self.thtDes, 2*pi/8, 2*pi/8)
-                        print(self.pos)
+                        #print(self.pos)
                         rospy.sleep(0.5)
                         if self.ifClose(self.thtDes):
                             self.vac_pub.publish(1)
@@ -152,63 +159,68 @@ class ODriveNode(object):
                             self.vac_pub.publish(2)
                             self.topDrop = False
                             self.task_comp = True
+                            self.task_pub.publish(self.task_comp)
+                            rospy.sleep(0.1)
                 print("Let's move the pizza now.")
-                self.movePizza = True
+                self.pizzaTop = False
+                #Call_Mobile_Pizza_ready()
+                #if mobile_ready:
+                    #self.movePizza = True
+                    
             if self.movePizza:
-                pass # TODO: Write code
-                
-            #if pizzaTop:
-                #self.vac_pub.publish(vacInt)
-                #sleep(0.25) # Let vacuum activate for a bit
-                #self.cam_pub.publish(moveBool)
-                #sleep(0.1)
-                #moveBool = False # Stop sending more values
-                #self.cam_pub.publish(moveBool)
-                #while not moveBool:
-                    #rospy.sleep(0.1)
-                    #bot.trajMoveRad(self.thtDes, 2*pi/8, 2*pi/8)
-                    
-                    ## If close enough, tell camera good to send next position
-                    #if self.ifClose(self.thtDes):
-                        #if vacInt == 2:
-                            #vacInt = 0 # Begin to vacuum
-                        #elif vacInt == 0:
-                            #vacInt = 1 # Inflate a tiny bit
-                            #self.vac_pub.publish(vacInt)
-                            #sleep(0.1)
-                            #vacInt = 2
-                        #moveBool = True
-            
-            #elif movePizza:
-                #self.vac_pub.publish(0) # stay vacuuming
-                #self.cam_pub.publish(moveBool)
-                #sleep(0.1)
-                #self.pos[1] = self.pos[1] - (balRad + pizRad) * in2m
-                #tht = deltaKin.solveIt(self.pos)
-                #moveBool = False
-                #self.cam_pub.publish(moveBool) # Stop sending values
-                #while not moveBool:
-                    #bot.trajMoveRad(tht, 2*pi/8, 2*pi/8)
-                    
-                    ## If close enough, tell camera good to send next position                   
-                    #if self.ifClose(tht):
-                        #moveBool = True
-                    
-                #pos = [self.pos[0], -tab/2, self.pos[2]]
-                #tht = deltaKin.solveIt(pos)
-                #bot.trajMoveRad(tht, 2*pi/8, 2*pi/8)
-                
-                #if self.ifClose(tht):
-                    ## Somehow tell mobile bot that it has the pizza
-                    #pass
-            
-            #elif punchDough:
-                #pass
-                ## TODO: Eventually do star compass shape :D
-            
+                print("Another pic dude")
+                bot.trajMoveRad(homeTht)
+                self.task_pub.publish(self.task_comp)
+                rospy.sleep(0.1)
+                self.task_comp = False
+                bot.trajMoveRad(self.thtDes)
+                if self.ifClose(self.thtDes):
+                    posMove = [self.pos[0], self.pos[1], ztable]
+                    thtMove = deltaKin.solveIt(posMove)
+                    bot.trajMoveRad(thtMove)
+                    rospy.sleep(0.5)
+                    if self.ifClose(self.thtMove):
+                        posEnd = [0, (tab/2+2)*in2mm, ztable]
+                        thtEnd = deltaKin.solveIt(posEnd)
+                        bot.trajMoveRad(thtEnd)
+                        rospy.sleep(0.5)
+                        if self.ifClose(self.thtEnd):
+                            #Call_Mobile_Pizza_pushed()
+                            self.movePizza = False
+                            self.punchDough = True
+                            self.task_comp = True
+                            
+            if self.punchDough:
+                bot.trajMoveRad(homeTht)
+                self.task_pub.publish(self.task_comp)
+                self.vac_pub.publish(0)
+                rospy.sleep(0.1)
+                self.task_comp = False
+                self.task_pub.publish(self.task_comp)
+                pos_list = [self.pos, np.array(self.pos)+np.array([20,0,0]), \
+                            np.array(self.pos)+np.array([0,20,0]), \
+                            np.array(self.pos)-np.array([20,0,0]), \
+                            np.array(self.pos)-np.array([0,20,0]), self.pos]
+                tht_list = [self.thtDes, deltaKin.solveIt(pos_list[1]),\
+                            deltaKin.solveIt(pos_list[2]), deltaKin.solveIt(pos_list[3]),
+                            deltaKin.solveIt(pos_list[4]), self.thtDes]
+                for i in range(6):
+                    bot.trajMoveRad(tht_list[i])
+                    if self.ifClose(self.thtDes):
+                        posPunch = [tht_list[i][0], tht_list[i][1], ztable]
+                        thtPunch = deltaKin.solveIt(posPunch)
+                        bot.trajMoveRad(thtPunch)
+                        rospy.sleep(0.5)
+                self.task_comp = True
+                self.task_pub.publish(self.task_comp)
+                self.punchDough = False
+                                
             #elif parmShake:
                 #pass
                 ## Mebbe
+            
+            else:
+                pass
 
 if __name__ == '__main__':
     try:
